@@ -1,14 +1,13 @@
 package com.example.ices.activity;
 
+import com.example.ices.BaseActivity;
 import com.example.ices.R;
-import com.example.ices.R.layout;
-
-import android.support.v7.app.ActionBarActivity;
+ 
+ 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+ 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
