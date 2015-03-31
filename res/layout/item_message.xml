@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+    
+    <FrameLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView 
+            android:id="@+id/msg_image"
+            android:layout_height="200dp"
+            android:layout_width="fill_parent"
+           />
+            <TextView 
+        android:id="@+id/mune_title"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:textColor="@color/C012642"
+              android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/toumingbg"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:text="one test"/>
+    </FrameLayout>
+    
+    
+    
+    <TextView 
+        android:id="@+id/item_content"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/dark_blue"
+        android:textSize="11sp"
+        android:textColor="@color/C464545"
+        android:gravity="center_vertical"
+        android:text="one test"/>
+     <View android:layout_width="fill_parent"
+         android:layout_height="10dp"/>
+     
+</LinearLayout>

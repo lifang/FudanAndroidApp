@@ -1,0 +1,199 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/F3F3F3"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_back" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/biankuang" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@color/F6F9FA" >
+
+        <LinearLayout
+            android:id="@+id/login_img_pass"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="18dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/key" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/login_edit_tel"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_img_pass"
+            android:background="@color/F6F9FA"
+            android:hint="Mobile phone"
+            android:maxWidth="20dp"
+            android:singleLine="true"
+            android:textColor="@color/t333333"
+            android:textColorHint="@color/edithinit"
+            android:textSize="@dimen/s_17sp" />
+
+        <LinearLayout
+            android:id="@+id/login_linear_delettel"
+            android:layout_width="@dimen/d_36dp"
+            android:layout_height="@dimen/d_36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_delete" />
+        </LinearLayout>
+    </RelativeLayout>
+	  
+        <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+       
+        android:background="@color/biankuang" />
+        <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/biankuang" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@color/F6F9FA" >
+
+        <LinearLayout
+            android:id="@+id/login_img_email"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="18dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/login_email" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/login_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_img_email"
+            android:background="@color/F6F9FA"
+            android:hint="Email"
+            android:maxWidth="20dp"
+            android:singleLine="true"
+            android:textColor="@color/t333333"
+            android:textColorHint="@color/edithinit"
+            android:textSize="@dimen/s_17sp" />
+
+        <LinearLayout
+            android:id="@+id/login_linear_deletemail"
+            android:layout_width="@dimen/d_36dp"
+            android:layout_height="@dimen/d_36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_delete" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="34dp"
+        android:background="@color/biankuang" />
+	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@color/F6F9FA" >
+
+        <LinearLayout
+            android:id="@+id/login_img_code"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="18dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/zc_time" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/login_edit_code"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_img_code"
+            android:background="@color/F6F9FA"
+            android:hint="Activation Number"
+            android:maxWidth="20dp"
+            android:singleLine="true"
+            android:textColor="@color/t333333"
+            android:textColorHint="@color/edithinit"
+            android:textSize="@dimen/s_17sp" />
+
+        <LinearLayout
+            android:id="@+id/login_linear_deletcode"
+            android:layout_width="@dimen/d_36dp"
+            android:layout_height="@dimen/d_36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_delete" />
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+       
+        android:background="@color/biankuang" />
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:paddingTop="10dp"
+        android:text="Activation number is required to change your email!"
+        android:textSize="11sp" />
+
+ 
+
+</LinearLayout>

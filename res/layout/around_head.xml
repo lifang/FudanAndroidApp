@@ -1,0 +1,324 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/F3F3F3"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="@color/F6F9FA" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/main_rl_Food"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/l1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/food"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/jtdd1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/l1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Diners"
+                    android:textSize="8sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="14dp"
+                    android:layout_below="@id/jtdd1" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_rl_sport"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/sport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/aorund_sport" />
+
+                <TextView
+                    android:id="@+id/jtd2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/sport"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Gyms and"
+                    android:textSize="8sp" />
+                                <TextView
+            
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/jtd2"
+                    android:layout_centerHorizontal="true"
+                 
+                    android:text="Fun"
+                    android:textSize="8sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="14dp"
+                    android:layout_below="@id/jtd2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_rl_drink"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/l2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/cofe" />
+
+                <TextView
+                    android:id="@+id/jtd3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/l2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Coffee"
+                    android:textSize="8sp" />
+         <TextView
+                  
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/jtd3"
+                    android:layout_centerHorizontal="true"
+                 
+                    android:text="Houses"
+                    android:textSize="8sp" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="14dp"
+                    android:layout_below="@id/jtd3" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_rl_other"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/la"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/other"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/jtddla"
+                    android:layout_width="62dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/la"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Others"
+                    android:textSize="8sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="14dp"
+                    android:layout_below="@id/jtddla" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/adadad" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/main_rl_sm"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/l3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/supermarket"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/jtdd3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/l3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Shops"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/tv_sms1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/jtdd3"
+                    android:layout_centerHorizontal="true"
+                    android:text="Market"
+                     android:visibility="gone"
+                    android:textSize="8sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="14dp"
+                    android:layout_below="@id/tv_sms1" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_rl_sb"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/l4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bank" />
+
+                <TextView
+                    android:id="@+id/tv_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/l4"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Banks and"
+                    android:textSize="8sp" />
+                            <TextView
+                    
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_sms"
+                    android:layout_centerHorizontal="true"
+                     
+                    android:text="ATM"
+                    android:textSize="8sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_post"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/Forum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/post" />
+
+                <TextView
+                    android:id="@+id/pss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Forum"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:textSize="8sp"
+                    android:text="Post" />
+                         <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pss"
+                    android:layout_centerHorizontal="true"
+                   
+                    android:textSize="8sp"
+                    android:text="Offices" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_rl_Hotel"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/ahotel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/et"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="8sp"
+                    android:layout_marginTop="10dp"
+                    android:text="Hotels" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/F6F9FA"
+            android:paddingLeft="18dp"
+            android:text="Recommendations" />
+    </LinearLayout>
+
+</LinearLayout>

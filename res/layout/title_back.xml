@@ -27,7 +27,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/d_7dp"
         android:layout_toRightOf="@id/titleback_linear_back"
-        android:text="返回"
+        android:text="Back"
         android:gravity="center_vertical"
         android:textColor="@color/fffefe"
         android:textSize="@dimen/s_19sp" />
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:singleLine="true"
-        android:text="tilte"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/s_19sp" />
 
@@ -57,11 +57,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/d_7dp"
+        android:layout_marginRight="17dp"
+        android:gravity="right"
         android:singleLine="true"
         android:text="确认"
-         android:visibility="gone"
+           
+        android:visibility="gone"
+        android:layout_centerVertical="true"
         android:textColor="@color/white"
         android:textSize="@dimen/s_17sp" />
 

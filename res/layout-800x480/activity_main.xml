@@ -1,0 +1,247 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+ 	android:orientation="vertical">
+
+ 	<RelativeLayout 
+ 	    android:layout_height="64dp"
+ 	    android:layout_width="fill_parent"
+ 	    android:background="@drawable/title_bg">
+ 	  <!--    	<LinearLayout
+ 	    	   
+ 	    	    android:layout_height="wrap_content"
+ 	    	    android:layout_width="wrap_content"
+ 	    	    android:layout_centerInParent="true"
+ 	    	    android:orientation="vertical"
+ 	    	    android:gravity="center_horizontal"
+ 	    	    >
+ 	    	    
+ 	    	    <TextView 
+ 	    	        android:layout_width="wrap_content"
+ 	    	        android:layout_height="wrap_content"
+ 	    	        android:textSize="20sp"
+ 	    	        android:textStyle="bold"
+ 	    	        android:textColor="@color/ffffff"
+ 	    	        android:text="ICES"/>
+ 	    	     	    	    <TextView 
+ 	    	        android:layout_width="wrap_content"
+ 	    	        android:layout_height="wrap_content"
+ 	    	        android:textSize="13sp"
+ 	    	        
+ 	    	        android:textColor="@color/ffffff"
+ 	    	        android:text="字体太小看不见"/>
+ 	    	    
+ 	    	</LinearLayout>
+ 	    	
+ 	     -->
+ 	    	    <ImageView android:layout_height="wrap_content"
+ 	    	        android:layout_width="wrap_content"
+ 	    	     
+ 	    	       android:layout_centerInParent="true"
+ 	    	         
+ 	    	        android:background="@drawable/log"/>
+				 <View
+ 	    	        android:id="@+id/is_show1"
+ 	    	        style="@style/dot_item"
+ 	    	        android:layout_alignParentRight="true"
+ 	    	        android:visibility="invisible"
+ 	    	        android:layout_centerVertical="true"
+ 	    	      />
+ 	    	 <RelativeLayout
+ 	    	    android:id="@+id/rela_message"
+ 	    	    android:layout_width="34dp"
+ 	    	  
+ 	    	    android:layout_height="wrap_content"
+ 	    	      
+ 	    	    android:layout_alignParentRight="true"
+ 	    	    android:layout_centerVertical="true"
+ 	    	    
+ 	    	    android:layout_marginRight="17dp" >
+
+ 	    	    <ImageView
+ 	    	        android:id="@+id/m_msg"
+ 	    	        android:layout_width="wrap_content"
+ 	    	        android:layout_height="wrap_content"
+ 	    	      
+ 	    	        android:background="@drawable/main_msg" />
+
+ 	    	    <View
+ 	    	        android:id="@+id/is_show"
+ 	    	        style="@style/dot_item"
+ 	    	        android:layout_alignParentRight="true"
+ 	    	        android:layout_alignParentTop="true"
+ 	    	      />
+
+ 	    	</RelativeLayout>
+ 	    	
+ 	    </RelativeLayout>
+
+    <ImageView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_img"/>
+
+     <LinearLayout  
+         android:layout_width="fill_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         android:orientation="vertical">
+         
+          	    <LinearLayout
+ 	     			android:layout_width="fill_parent"
+ 	     			android:layout_height="0dp"
+ 	     			android:layout_weight="1"
+ 	     			android:background="@drawable/title_bg"
+ 	     			android:orientation="horizontal"
+ 	    	       >
+          	        <LinearLayout 
+          	            android:id="@+id/ll_pre"
+          	            android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	            android:layout_height="fill_parent"
+          	            android:gravity="center"
+          	            android:background="@color/C0654bb"
+          	            android:orientation="vertical">
+          	            
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/pre_arr"/>
+          	            <TextView android:text="Pre-Arrival"
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            
+          	            
+          	        </LinearLayout>
+          	               <LinearLayout 
+          	                   android:id="@+id/ll_arrival"
+          	                   android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	            android:layout_height="fill_parent"
+          	            android:gravity="center"
+          	           android:background="@color/C06469c"
+          	            android:orientation="vertical">
+          	            
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/arival"/>
+          	            <TextView android:text="Arrival"
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            
+          	            
+          	        </LinearLayout>
+          	        <LinearLayout 
+          	            android:id="@+id/campus"
+          	            android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	            android:layout_height="fill_parent"
+          	            android:gravity="center"
+          	            android:background="@color/C084ca5"
+          	            android:orientation="vertical">
+          	            
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/campus"/>
+          	            <TextView android:text="Campus"
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            
+          	            
+          	        </LinearLayout>
+          	        
+          	    </LinearLayout>
+          	<LinearLayout
+ 	     			android:layout_width="fill_parent"
+ 	     			android:layout_height="0dp"
+ 	     			android:layout_weight="1"
+ 	     			android:background="@drawable/title_bg"
+ 	     			android:orientation="horizontal"
+ 	    	       >
+          	        <LinearLayout 
+          	            android:id="@+id/ll_events"
+          	            android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	            android:layout_height="fill_parent"
+          	            android:gravity="center"
+          	              android:background="@color/CCCC3"
+          	            android:orientation="vertical">
+          	            
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/events"/>
+          	            <TextView android:text="Events"
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            
+          	            
+          	        </LinearLayout>
+          	               <RelativeLayout 
+          	                   android:id="@+id/ll_arround"
+          	                   android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	               android:background="@color/CCCCC4"
+          	            android:layout_height="fill_parent"
+          	            
+          	            android:orientation="vertical">
+          	            <LinearLayout       
+          	                android:id="@+id/ll_tvmore"
+ 						   android:layout_width="wrap_content"
+          	            android:layout_height="wrap_content"
+          	            android:layout_centerInParent="true"
+          	             android:gravity="center"
+          	            android:orientation="vertical">
+          	                         	                   
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/arround"/>
+          	            <TextView android:text="Around" 
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            </LinearLayout>
+         	            <TextView android:text="Campus" 
+          	          
+          	                android:textColor="@color/ffffff"
+          	                android:layout_below="@id/ll_tvmore"
+          	             	android:layout_centerHorizontal="true"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	         
+          	            
+          	        </RelativeLayout>
+          	        <LinearLayout 
+          	            android:id="@+id/ll_more"
+          	            android:layout_width="0dp"
+          	            android:layout_weight="1"
+          	            android:layout_height="fill_parent"
+          	            android:gravity="center"
+          	               android:background="@color/CCCCC5"
+          	            android:orientation="vertical">
+          	            
+          	            <ImageView android:layout_height="wrap_content"
+          	                android:layout_width="wrap_content"
+          	                android:background="@drawable/settingmore"/>
+          	            <TextView android:text="More"
+          	                android:layout_marginTop="13dp"
+          	                android:textColor="@color/ffffff"
+          	                android:layout_width="wrap_content"
+          	                android:layout_height="wrap_content"/>
+          	            
+          	            
+          	        </LinearLayout>
+          	        
+          	    </LinearLayout>
+         
+         
+     </LinearLayout>
+
+</LinearLayout>

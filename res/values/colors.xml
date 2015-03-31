@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	
+    <color name="tmc">#e0454749</color>
+    <color name="Btmc">#e0D5D5D6</color>
+     <color name="biankuang">#DEE8EE</color>
+     <color name="EBECEC">#EBECEC</color>
+    <color name="C343333">#343333</color>
+    	<color name="C464545">#464545</color>
+     <color name="CCCC3">#115cbf</color>
+      <color name="CCCCC4">#0a4da4</color>
+       <color name="CCCCC5">#04408e</color>
+     <color name="C084ca5">#084ca5</color>
+       <color name="C06469c">#06469c</color>
+    <color name="C0654bb">#0654bb</color>
+     <color name="C012642">#012642</color>
+    <color name="dark_blue">#023D68</color>
+    <color name="D5E9F0">#D5E9F0</color>
+	<color name="DEF0FA">#DEF0FA</color>
     <color name="edithinit">#E6E7E7</color>
+    <color name="lightblue">#145CB8</color>
   <color name="C606060">#606060</color>
      <color name="C838383">#838383</color>
     <color name="C84C0F5">#84C0F5</color>
+     
+     <color name="bantouming">#e0000000</color>
     <color name="touming">#00000000</color> <!-- 透明白色 -->
     <color name="toumingbai">#f6f0f0f0</color> <!-- 底部透明白色 -->
     <color name="touming7f">#7f000000</color> <!-- 透明黑色 -->
@@ -36,6 +54,8 @@
     <color name="t333333">#333333</color>
     <color name="t828282">#828282</color>
     <color name="adadad">#adadad</color>
+    <color name="prebuttom">#c2e5d0</color>
+    <color name="tv_red">#E23D3D</color>
     <!-- 其他 -->
     <color name="c6c6c6">#c6c6c6</color>
     <color name="e5e5e5">#e5e5e5</color>
@@ -45,6 +65,10 @@
     <color name="t9f4c4c">#9f4c4c</color>
     <color name="t699f4c">#699f4c</color>
  	<color name="B4B4B4">#B4B4B4</color>
+ 	 
+ 	<color name="E8E8E7">#E8E8E7</color>
+ 	
+ 	
       <color name="F3F3F3">#F3F3F3</color>
       <color name="F6F9FA">#F6F9FA</color>
  
@@ -65,11 +89,13 @@
     	    name="bg_FF0404">#FF0404</color>
  	<color 
     	    name="bg_FF1F1F">#FF1F1F</color>
-  
+  <color name="C0075FF">#0075FF</color>
    <color name="FB9401">#FB9401</color>
       <color name="c838383">#838383</color>
     <color name="white">#ffffffff</color> <!-- 白色 -->
     <color name="top_bg_color">#1FB8FE</color> <!-- 页面上方 蓝色块 -->
+     
+     <color name="text_read">#021F35</color>
     <color name="black">#000000</color>
  
     <color name="oederdetails_bg">#F5F5F5</color> <!-- 订单详情浅灰色背景 -->

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mylinear"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+ 
+    android:gravity="center_vertical"
+       android:background="@color/DEF0FA"
+    android:orientation="vertical" >
+ 	<view android:layout_height="0.5dp"
+ 	    android:layout_width="fill_parent"
+ 	     android:background="@color/adadad"
+ 	   />
+    <LinearLayout 
+        android:id="@+id/child_TV"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="34dp"
+ 
+        android:orientation="vertical">
+        <TextView 
+            android:id="@+id/expand_child_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tittt"
+            android:textSize="17sp"/>
+    </LinearLayout>
+     	<view android:layout_height="0.5dp"
+ 	    android:layout_width="fill_parent"
+ 	     android:background="@color/prebuttom"
+ 	     android:layout_alignParentBottom="true"
+ 	   />
+</RelativeLayout>

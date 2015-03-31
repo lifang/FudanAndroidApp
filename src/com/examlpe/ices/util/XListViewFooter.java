@@ -61,10 +61,10 @@ public class XListViewFooter extends LinearLayout {
 			mHintView.setText(R.string.xlistview_footer_hint_normal);
 		}
 	}
-	public void setState1(int state) {
+	public void setState11(int state) {
 		 //	this.setVisibility(View.GONE);
 		 //	mHintView.setVisibility(View.GONE);
-			mHintView.setText("没有更多了！");
+			mHintView.setText("");
 		 
 	}
 	public void setState2(int state) {

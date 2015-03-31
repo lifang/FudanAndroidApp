@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ 	android:orientation="vertical"
+ 	android:background="@color/F6F9FA" >
+	<include layout="@layout/title_back"/>
+ 
+ <LinearLayout
+        android:id="@+id/eva_nodata"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+      
+        android:layout_gravity="center"
+        android:background="@color/ffffff"
+        android:orientation="horizontal" 
+        android:visibility="gone">
+
+        <include layout="@layout/include_norecord" />
+    </LinearLayout>
+ 
+ 	<FrameLayout 
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="fill_parent"
+ 	    android:layout_marginTop="15dp"
+ 	    > 
+      		 <com.examlpe.ices.util.XListView
+        android:id="@+id/event_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white" 
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:fadingEdge="none"
+        android:scrollbars="none" />
+ 
+ 		 <LinearLayout 
+ 		     android:layout_width="fill_parent"
+ 		     android:layout_height="wrap_content"
+ 		     android:layout_gravity="bottom"
+ 		     android:layout_marginBottom="15dp"
+ 		     
+ 		     android:layout_marginRight="10dp"
+ 		     android:gravity="right"
+ 		     android:orientation="horizontal">
+ 		     <LinearLayout
+ 		         android:id="@+id/showdilog"
+ 		          android:layout_width="wrap_content"
+ 		         android:layout_height="wrap_content"
+ 		           
+ 		         android:background="@drawable/yuanxing"
+ 		         android:orientation="horizontal">
+ 		           <ImageView android:layout_height="wrap_content"
+ 		         android:layout_width="wrap_content"
+ 		         android:background="@drawable/notifi"/>
+ 		         
+ 		     </LinearLayout>
+ 		    
+ 		     
+ 		 </LinearLayout>
+	 </FrameLayout>   
+</LinearLayout>
