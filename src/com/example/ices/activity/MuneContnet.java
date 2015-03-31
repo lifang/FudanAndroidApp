@@ -127,7 +127,7 @@ public class MuneContnet extends BaseActivity{
 		params.put("token", MyApplication.getToken()); //type
 		params.put("type",type); 		
 		params.setUseJsonStreamer(true);
-		 
+		 System.out.println("--params-"+params);
 	 
 		MyApplication.getInstance().getClient().post(Config.getContents, params, new AsyncHttpResponseHandler() {
 

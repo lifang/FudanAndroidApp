@@ -161,7 +161,10 @@ public class MainActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		System.out.println("进入 回调···");
 		super.onActivityResult(requestCode, resultCode, data);
-		 isQuit = data.getExtras().getBoolean("isQuit");
+		if(data!=null){
+			 isQuit = data.getExtras().getBoolean("isQuit");
+		}
+	 
 		if(isQuit){
 			finish();
 		}

@@ -226,12 +226,12 @@ public class LoginActivity extends BaseActivity{
  	///MyApplication.getInstance().getClient().post(context, name2, headers, entity, contentType, responseHandler)
     //	MyApplication.getInstance().getClient().addHeader("dadad", "jdjdj");  
  	// MyApplication.getInstance().getClient().post(context, name2, headers, params, null, responseHandler); 
-		client.post(url, params, new AsyncHttpResponseHandler() {
+		MyApplication.getInstance().getClient().post(url, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				
+				System.out.println("login---" +  new String(responseBody).toString());	
 				 
 				///String re = new String(responseBody).toString();
 			  // 	headers[o].get
@@ -263,7 +263,7 @@ public class LoginActivity extends BaseActivity{
 	 					editor.putString("tag",mySharedPreferences.getString("tag", "tag")+","+current.getStudentId());
 	 					editor.commit();
 	 					 
-	 					 
+	 					System.out.println("token---" +  jsonobject.getString("token"));	
 	 					 MyApplication.setToken(jsonobject.getString("token"));
 	 					 Intent i =new Intent(LoginActivity.this,MainActivity.class);
 	 					 startActivity(i);
