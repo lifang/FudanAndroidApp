@@ -74,8 +74,7 @@ public class More extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent aa = new Intent();
-				 
+				Intent aa = new Intent();				 
 				aa.putExtra("isQuit", false);
 	                //设置返回数据
 				More.this.setResult(RESULT_OK, aa);

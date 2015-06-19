@@ -81,7 +81,6 @@ public class AroundDetail extends BaseActivity{
 	private LayoutInflater inflater;
 	private RelativeLayout rl_imgs,rela_loc;
 	private int  index_ima=0;
- 
 	private String phoneNumber,locName;
 	private float lat,lng;
 	List<View> list = new ArrayList<View>();

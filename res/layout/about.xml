@@ -2,15 +2,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- 	android:orientation="vertical"
- 	android:background="@color/F3F3F3" >
-	<include layout="@layout/title_back"/>
- 
- 
- 		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="关于"/>
-	 
+    android:background="@color/F3F3F3"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+         android:lineSpacingExtra="4dp"
+         android:layout_marginTop="10dp"
+        android:text="Admission &amp; Cooperation Office,International Cultural Exchange School, Fudan UniversityRoom 909, East Main, GuangHua Building,220 Han Dan Road, Shanghai 200433, China"
+        android:textSize="17sp" />
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+         android:lineSpacingExtra="4dp"
+        android:text="Tel: +86-21-55664859"
+        android:textSize="17sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+         android:lineSpacingExtra="4dp"
+        android:text="Email: yuyansheng@fudan.edu.cn"
+        android:textSize="17sp" />
 </LinearLayout>

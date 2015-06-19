@@ -2,120 +2,138 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- 	android:orientation="vertical"
- 	android:background="@color/F3F3F3" >
-	<include layout="@layout/title_back"/>
- 
-	 <RelativeLayout 
-	    android:id="@+id/rl_info"
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/d_48dp"
-	 	android:background="@drawable/bg_light_black"
-	    >
- 		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="Contact Information"/>
-	</RelativeLayout>
-	<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    
-	    android:background="@color/adadad"/>
-	<RelativeLayout 
-	    android:id="@+id/rl_cp"
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/d_48dp"
-	  
-	 		android:background="@drawable/bg_light_black"
-	    >
-  		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="Change Password"/>
-	</RelativeLayout>
-	<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    android:background="@color/adadad"/>
-	 
-		<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    android:layout_marginTop="30dp"
-	    android:background="@color/adadad"/>
-	<RelativeLayout 
-	    android:id="@+id/rl_aboutus"
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/d_48dp"
-	  
-	 		android:background="@drawable/bg_light_black"
-	    >
-  		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="About Us"/>
-	</RelativeLayout>
-	<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    android:background="@color/adadad"/>
-	 	<RelativeLayout 
-	    android:id="@+id/rl_contectus"
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/d_48dp"
-	  
-	 		android:background="@drawable/bg_light_black"
-	    >
-  		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="Contect Us"/>
-	</RelativeLayout>
-	<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    android:background="@color/adadad"/>
-	 	<RelativeLayout 
-	    android:id="@+id/rl_Update"
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/d_48dp"
-	  
-	 		android:background="@drawable/bg_light_black"
-	    >
-  		<TextView android:layout_height="wrap_content"
- 		    android:layout_width="wrap_content"
- 		    android:layout_centerInParent="true"
- 		    android:textSize="17sp"
- 		    android:text="Update"/>
-	</RelativeLayout>
-	<View android:layout_height="0.5dp"
-	    android:layout_width="fill_parent"
-	    android:background="@color/adadad"/>
-		<View android:layout_height="0dp"
-		    android:layout_weight="1"
-	    android:layout_width="fill_parent"
-	    />
-	<LinearLayout
-	    android:id="@+id/login_linear_exit" 
-	    android:layout_width="match_parent"
-	    android:layout_height="44dp"
-	    android:layout_marginLeft="18dp"
-	    android:layout_marginRight="18dp"
-	    android:layout_marginBottom="20dp"
-	    android:background="@drawable/bg_red_dra"
-	    android:gravity="center" 
-	    android:orientation="horizontal"
-	    >
-	 
-	    <TextView 
-	         
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	      
-	        android:text="Exit"
-	        android:textSize="@dimen/s_17sp"
-	        android:textColor="@color/fffefe"
-	        />
- 
-	</LinearLayout>
+    android:background="@color/F3F3F3"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_back" />
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@drawable/bg_light_black" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Contact Information"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/adadad" />
+
+    <RelativeLayout
+        android:id="@+id/rl_cp"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@drawable/bg_light_black" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Change Password"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/adadad" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        android:background="@color/adadad" />
+
+    <RelativeLayout
+        android:id="@+id/rl_aboutus"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_light_black"
+         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="About Us"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/adadad" />
+
+    <RelativeLayout
+        android:id="@+id/rl_contectus"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@drawable/bg_light_black" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Contect Us"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/adadad" />
+
+    <RelativeLayout
+        android:id="@+id/rl_Update"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/d_48dp"
+        android:background="@drawable/bg_light_black" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Update"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/adadad" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/login_linear_exit"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/bg_red_dra"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:textColor="@color/fffefe"
+            android:textSize="@dimen/s_17sp" />
+    </LinearLayout>
+
 </LinearLayout>

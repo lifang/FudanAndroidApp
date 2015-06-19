@@ -49,6 +49,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,14 +58,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
  
@@ -81,7 +85,7 @@ public class PreDetail extends Activity {
 	private String html;
 	private int  index_ima=0;
 	private RelativeLayout rl_imgs;
- 
+	private PreDetailEntity ee;
 	// 图片的地址，这里可以从服务器获取
 	private WebView wbview_show;
 	private ArrayList<String> ma = new ArrayList<String>();
@@ -111,7 +115,16 @@ public class PreDetail extends Activity {
 				initIndicator();
 			 
 				adapter.notifyDataSetChanged();
-			 
+				try {
+					if(!ee.getUrlPath().equals("")){
+	
+						login_linear_exit.setVisibility(View.VISIBLE);
+						
+					}
+				} catch (Exception e) {
+					
+				}
+				
 				break;
 			case 1:
 				Toast.makeText(getApplicationContext(), (String) msg.obj,
@@ -130,6 +143,11 @@ public class PreDetail extends Activity {
 			}
 		}
 	};
+	private Button top;
+	private ScrollView sc;
+	private LinearLayout login_linear_exit;
+	private TextView tv_title;
+	private TextView tv_open;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +157,8 @@ public class PreDetail extends Activity {
 		 
 		id=getIntent().getIntExtra( "id",0);
 		 System.out.println("id"+id);
-	 
+		 tv_open = (TextView)findViewById(R.id.tv_open);
+		 tv_title = (TextView)findViewById(R.id.tv_title);
 		
 		more_tv_detail = (TextView) findViewById(R.id.tv_more);
  
@@ -164,11 +183,48 @@ public class PreDetail extends Activity {
 //		});
 		 
 		  getData();
- 
-		//测试代码
-	//	handler.sendEmptyMessage(0);
-		 
- 
+		sc = (ScrollView)findViewById(R.id.sc);
+		top = (Button) findViewById(R.id.top);
+			
+			top.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					top.post(new Runnable() {
+					    
+					   @Override
+					   public void run() {
+					    // TODO Auto-generated method stub
+					    sc.fullScroll(ScrollView.FOCUS_UP);
+					   }
+					  });
+					
+				}
+			});
+			login_linear_exit = (LinearLayout)findViewById(R.id.login_linear_exit);
+			
+			
+				
+			login_linear_exit.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					if(ee!=null){
+						try {
+							final Uri uri = Uri
+									.parse(ee.getUrlPath());
+							Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+							startActivity(intent);
+						} catch (Exception e) {
+							Toast.makeText(getApplicationContext(), "地址有误！", 1000).show();
+							
+						}
+					
+					}
+					
+				}
+			});
+			
 	}
 
 	
@@ -497,8 +553,11 @@ public class PreDetail extends Activity {
 		params.put("studentId", MyApplication.currentUser.getStudentId());
 		params.put("id", id);
 		params.put("token", MyApplication.getToken());
+		
 		params.setUseJsonStreamer(true);
 		MyApplication.getInstance().getClient().post(Config.PREDETAIL, params, new AsyncHttpResponseHandler() {
+
+			
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -518,7 +577,7 @@ public class PreDetail extends Activity {
 						Intent i =new Intent(getApplication(),LoginActivity.class);
 						startActivity(i);
 					}else if(code==0){
-						PreDetailEntity ee = gson.fromJson(jsonobject.getString("result"),
+						ee = gson.fromJson(jsonobject.getString("result"),
  		 					new TypeToken<PreDetailEntity>() {
  							}.getType());
 //						eventsFinshTime.setText(ee.getEventsFinshTime());  PreDetailEntity
@@ -527,12 +586,14 @@ public class PreDetail extends Activity {
 									Toast.LENGTH_SHORT).show();
 							finish();
 						}else{
+							tv_title.setText(ee.getContentTitle());
 							more_tv_detail.setText(ee.getContentText());
+							tv_open.setText(ee.getUrlTitle());
 							if(ee.getPictures().size()==0){
 								rl_imgs.setVisibility(View.GONE);
 							}
 							for(int i=0;i<ee.getPictures().size();i++){
-								ma.add(ee.getPictures().get(i).getPictureSmallFilePath());
+								ma.add(ee.getPictures().get(i).getPictureLargeFilePath());
 							//	ma.add("http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png");
 							}
 						}

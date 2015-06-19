@@ -8,8 +8,9 @@
   	 
 	<ImageView 
 	    android:id="@+id/for_campus"
-	    android:layout_height="200dp"
+	    android:layout_height="wrap_content"
 	    android:layout_width="fill_parent"
+	    android:scaleType="centerInside"
 	    android:background="@drawable/bg_campus"/>
 	
 	

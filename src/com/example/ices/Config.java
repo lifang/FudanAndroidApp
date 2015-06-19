@@ -18,14 +18,14 @@ public class Config {
 	/**
 	 * Í¼Æ¬Â·¾¶
 	 */
- 	public static String IMAGE_PATH = "http://114.215.149.242:9090/icesapp/";
+ 	public static String IMAGE_PATH = "http://icesapp.fudan.edu.cn/";
+ 	
 	/**
 	 * ÅäÖÃÂ·¾¶
 	 */
-	 public static String PATH = "http://114.215.149.242:9090/icesapp/api/"; //  
-	
-	
-	
+	 public static String PATH = "http://icesapp.fudan.edu.cn/api/"; //  
+ 	//public static String PATH = "http://114.215.149.242:9090/icesapp/api/"; // 
+	 
 	/**
 	 * Í¼Æ¬Â·¾¶
 	 */

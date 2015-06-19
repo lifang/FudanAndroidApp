@@ -74,10 +74,10 @@ public class MessageAdapter extends BaseAdapter{
  		System.out.println(" list.get(position).getPictureSmallFilePath()"+ list.get(position).getPictureSmallFilePath());
  		if(list.get(position).getNotificationIsRead()==1){
  			holder.mune_title.setTextColor(context.getResources().getColor(R.color.C012642));
- 			holder.item_content.setTextColor(context.getResources().getColor(R.color.C464545));
+ 			//holder.item_content.setTextColor(context.getResources().getColor(R.color.C464545));
  		}else{
  			holder.mune_title.setTextColor(context.getResources().getColor(R.color.text_read));
- 			holder.item_content .setTextColor(context.getResources().getColor(R.color.C343333)); //343333
+ 			//holder.item_content .setTextColor(context.getResources().getColor(R.color.C343333)); //343333
  		}
  		
  		holder.mune_title.setText(list.get(position).getNotificationTitle());
