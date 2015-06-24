@@ -88,6 +88,9 @@ OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 					//	norecord_text_to.setText("您没有相关的商品");
 						event_listview.setVisibility(View.GONE);
 						eva_nodata.setVisibility(View.VISIBLE);
+					}else {
+						event_listview.setVisibility(View.VISIBLE);
+						eva_nodata.setVisibility(View.GONE);
 					}
 					onRefresh_number = true; 
 				 	myAdapter.notifyDataSetChanged();

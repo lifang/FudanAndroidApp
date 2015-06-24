@@ -146,12 +146,14 @@ public class AroundDetail extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), GeoCoderMap.class);
-				i.putExtra("lat", lat+"");
-				i.putExtra("lng", lng+"");
-				i.putExtra("title", locName);
-				System.out.println("ÏêÇé¡¤¡¤¡¤¡¤"+lat+lng);
-				startActivity(i);
+				if (locName != null && !locName.equals("")) {
+					Intent i = new Intent(getApplicationContext(), GeoCoderMap.class);
+					i.putExtra("lat", lat+"");
+					i.putExtra("lng", lng+"");
+					i.putExtra("title", locName);
+					System.out.println("ÏêÇé¡¤¡¤¡¤¡¤"+lat+lng);
+					startActivity(i);
+				}
 			}
 		});
 		view_pager = (ViewPager) findViewById(R.id.view_pager);

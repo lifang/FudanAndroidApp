@@ -35,8 +35,9 @@
         android:theme="@style/AppTheme" >
                 <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="e6fdjuvCM1OwnkG1DTGmC0r2" />
-  			 
+            android:value="aOwiTZ7yp1iUsWWHDCA2zKM1" />
+                
+  			 <!--  android:value="e6fdjuvCM1OwnkG1DTGmC0r2" -->
         <activity
             android:name="com.example.ices.activity.Welcome"
              android:screenOrientation="portrait"
@@ -149,8 +150,9 @@
                 <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE"/>
             </intent-filter>
         </service>
-          <meta-data android:name="api_key" android:value="f4um5Eix9zSYgLFh1tDiGWfd" />
-       <!--     <meta-data android:name="api_key" android:value="e6fdjuvCM1OwnkG1DTGmC0r2" /> -->  
+           <meta-data android:name="api_key" android:value="f4um5Eix9zSYgLFh1tDiGWfd" />
+         <!-- <meta-data android:name="api_key" android:value="e6fdjuvCM1OwnkG1DTGmC0r2" />  -->
+        
      </application>
          <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
     </permission>
