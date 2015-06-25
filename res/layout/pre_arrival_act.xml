@@ -9,6 +9,7 @@
 	    android:id="@+id/for_campus"
 	    android:layout_height="160dp"
 	    android:layout_width="fill_parent"
+	    android:visibility="gone"
 	    android:background="@drawable/prearrival"/>
   	<com.handmark.pulltorefresh.library.PullToRefreshListView
  	    android:id="@+id/expandlistview"

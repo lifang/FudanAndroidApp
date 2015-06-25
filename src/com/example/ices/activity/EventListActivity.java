@@ -122,31 +122,31 @@ public class EventListActivity extends BaseActivity implements  IXListViewListen
 			});
 			event_listview.setAdapter(myAdapter);
 			
-			if(title.endsWith("Traveling")){
+			if(title.endsWith("Tourism")){
 				type=2;
 			}
 			if(title.endsWith("Sports")){
 				type=3;
 			}
-			if(title.endsWith("Ceremony")){
+			if(title.endsWith("Ceremonies")){
 				type=4;
 			}
-			if(title.endsWith("School club")){
+			if(title.endsWith("School Clubs")){
 				type=5;
 			}
-			if(title.endsWith("Forum")){
+			if(title.endsWith("Forums")){
 				type=6;
 			}
-			if(title.endsWith("Literature and art")){
+			if(title.endsWith("Movies and Shows")){
 				type=7;
 			}
-			if(title.endsWith("Entertainment")){
+			if(title.endsWith("Recreation")){
 				type=8;
 			}
-			if(title.endsWith("Other")){
+			if(title.endsWith("Others")){
 				type=9;
 			}
-			if(title.endsWith("Food")){
+			if(title.endsWith("Lectures")){
 				type=1;
 			}
 		}

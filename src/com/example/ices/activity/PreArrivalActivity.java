@@ -241,22 +241,22 @@ public class PreArrivalActivity extends BaseActivity {
 		switch (v.getId()) {
 		case R.id.main_rl_Food:
 			Intent main_rl_lec =new Intent(getApplication(),AroundList.class);
-			main_rl_lec.putExtra("title", "Food");
+			main_rl_lec.putExtra("title", "Diners");
 			startActivity(main_rl_lec);
 			break;
 		case R.id.main_rl_drink: //main_rl_sport
 			Intent main_rl_trl =new Intent(getApplication(),AroundList.class);
-			main_rl_trl.putExtra("title", "Drink");
+			main_rl_trl.putExtra("title", "Coffee Houses");
 			startActivity(main_rl_trl);
 			break;
 		case R.id.main_rl_sport: //main_rl_Ceremony
 			Intent main_rl_sport =new Intent(getApplication(),AroundList.class);
-			main_rl_sport.putExtra("title", "Sports");
+			main_rl_sport.putExtra("title", "Gyms and Fun");
 			startActivity(main_rl_sport);
 			break;
 		case R.id.main_rl_other: //main_rl_other
 			Intent main_rl_other =new Intent(getApplication(),AroundList.class);
-			main_rl_other.putExtra("title", "Other");
+			main_rl_other.putExtra("title", "Others");
 			startActivity(main_rl_other);
 			break;
 			
@@ -283,13 +283,13 @@ public class PreArrivalActivity extends BaseActivity {
 			
 		case R.id.main_post: //main_rl_la
 			Intent Forum =new Intent(getApplication(),SearchAround.class);
-			Forum.putExtra("title", "Post");
+			Forum.putExtra("title", "Post Offices");
 			startActivity(Forum);
 			break;
 			
 		case R.id.main_rl_Hotel: //main_rl_Forum
 			Intent main_rl_Hotel =new Intent(getApplication(),SearchAround.class);
-			main_rl_Hotel.putExtra("title", "Hotel");
+			main_rl_Hotel.putExtra("title", "Hotels");
 			startActivity(main_rl_Hotel);
 			break;
 		 
@@ -298,7 +298,7 @@ public class PreArrivalActivity extends BaseActivity {
 			
 		case R.id.main_rl_sb: //main_rl_Forum
 			Intent main_rl_sb =new Intent(getApplication(),SearchAround.class);
-			main_rl_sb.putExtra("title", "Bank");
+			main_rl_sb.putExtra("title", "Banks and ATM");
 			startActivity(main_rl_sb);
 			break;
 			
@@ -307,7 +307,7 @@ public class PreArrivalActivity extends BaseActivity {
   
 		case R.id.main_rl_sm:
 			Intent main_rl_sm =new Intent(getApplication(),SearchAround.class);
-			main_rl_sm.putExtra("title", "SuperMarket");
+			main_rl_sm.putExtra("title", "Shops");
 			startActivity(main_rl_sm);
 			break;
 		default:

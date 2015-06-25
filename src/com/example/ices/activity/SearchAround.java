@@ -190,16 +190,16 @@ OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 			});
 			event_listview.setAdapter(myAdapter);
 			
-			if(title.endsWith("SuperMarket")){
+			if(title.endsWith("Shops")){
 				type="超市";
 			}
-			if(title.endsWith("Bank")){
+			if(title.endsWith("Banks and ATM")){
 				type="银行";
 			}
-			if(title.endsWith("Post")){
+			if(title.endsWith("Post Offices")){
 				type="邮局";
 			}
-			if(title.endsWith("Hotel")){
+			if(title.endsWith("Hotels")){
 				type="酒店";
 			}
  
