@@ -83,6 +83,7 @@ public class AroundDetail extends BaseActivity{
 	private int  index_ima=0;
 	private String phoneNumber,locName;
 	private float lat,lng;
+	private boolean isclick = true;
 	List<View> list = new ArrayList<View>();
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -177,15 +178,26 @@ public class AroundDetail extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Dialog ddd=	new DialogUtil(AroundDetail.this,"is shore").getCheck(new CallBackChange() {
+				if (isclick == true) {
+					isclick = false;
+					new Handler().postDelayed(new Runnable(){    
+					    public void run() {    
+					    	isclick = true;  
+					    }    
+					 }, 2000); 
 					
-					@Override
-					public void change() {
-						// TODO Auto-generated method stub
-						Toast.makeText(getApplication(), "DOOOO", 1000).show();
-					}
-				});
-				ddd.show();
+					Dialog ddd=	new DialogUtil(AroundDetail.this,"is shore").getCheck(new CallBackChange() {
+						
+						@Override
+						public void change() {
+							// TODO Auto-generated method stub
+							Toast.makeText(getApplication(), "DOOOO", 1000).show();
+						}
+					});
+					ddd.show();
+				}
+		
+				
 			}
 			
 		});

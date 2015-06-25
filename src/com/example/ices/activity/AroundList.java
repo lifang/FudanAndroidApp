@@ -119,17 +119,17 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
 		});
 		event_listview.setAdapter(myAdapter);
 		
-		if(title.endsWith("Sports")){
+		if(title.endsWith("Gyms and Fun")){
 			type=2;
 		}
-		if(title.endsWith("Drink")){
+		if(title.endsWith("Coffee Houses")){
 			type=3;
 		}
-		if(title.endsWith("Other")){
+		if(title.endsWith("Others")){
 			type=4;
 		}
  
-		if(title.endsWith("Food")){
+		if(title.endsWith("Diners")){
 			type=1;
 		}
 	}
