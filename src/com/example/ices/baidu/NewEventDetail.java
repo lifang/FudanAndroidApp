@@ -18,6 +18,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.example.ices.Config;
 import com.example.ices.MyApplication;
@@ -32,6 +33,7 @@ import com.loopj.android.http.RequestParams;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -69,7 +71,7 @@ import android.widget.Toast;
 public class NewEventDetail extends Activity {
 
 	private ViewPager view_pager;
-	
+    private Dialog loadingDialog;
 	private LayoutInflater inflater;
 
  
@@ -94,7 +96,8 @@ public class NewEventDetail extends Activity {
 	}
 
 	private void getdata(String url) {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
  
 		RequestParams params = new RequestParams();
 		params.put("id",id);
@@ -111,7 +114,9 @@ public class NewEventDetail extends Activity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String userMsg = new String(responseBody).toString();
 	 
 				Log.i("ljp", userMsg);
@@ -177,7 +182,9 @@ public class NewEventDetail extends Activity {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

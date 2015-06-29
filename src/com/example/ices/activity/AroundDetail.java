@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.examlpe.ices.util.DialogUtil;
 import com.examlpe.ices.util.DialogUtil.CallBackChange;
 import com.examlpe.ices.util.ImageCacheUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
  
 import com.example.ices.BaseActivity;
@@ -83,6 +84,7 @@ public class AroundDetail extends BaseActivity{
 	private int  index_ima=0;
 	private String phoneNumber,locName;
 	private float lat,lng;
+    private Dialog loadingDialog;
 	private boolean isclick = true;
 	List<View> list = new ArrayList<View>();
 	private Handler handler = new Handler() {
@@ -216,11 +218,8 @@ public class AroundDetail extends BaseActivity{
 		});
 	}
 	private void getdata() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		//AsyncHttpClient client = new AsyncHttpClient(); // 创建异步请求的客户端对象
 		RequestParams params = new RequestParams();
 		params.put("id",id);
@@ -239,7 +238,9 @@ public class AroundDetail extends BaseActivity{
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
 				String userMsg = new String(responseBody).toString();
-	 
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				Log.i("ljp", userMsg);
 				Gson gson = new Gson();
 				//EventEntity
@@ -294,7 +295,9 @@ public class AroundDetail extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

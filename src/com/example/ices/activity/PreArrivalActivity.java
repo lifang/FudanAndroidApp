@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
  
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.examlpe.ices.util.ExpandAnimation;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -57,6 +59,7 @@ public class PreArrivalActivity extends BaseActivity {
 //	private List<ContentListEntity> listChild2 = new ArrayList<ContentListEntity>();
 //	private List<MenuTitle> list= new ArrayList<MenuTitle>();
 	private AroundAdapter myAdapter;
+    private Dialog loadingDialog;
 	private PullToRefreshListView expandlistview;
 	//private Handler handler = new Handler();
 	int i = 0;
@@ -137,7 +140,8 @@ public class PreArrivalActivity extends BaseActivity {
 	}
 
 	private void getData() {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		myList.clear();
 		// TODO Auto-generated method stub
 		//AsyncHttpClient client = new rows(); //  
@@ -157,7 +161,9 @@ public class PreArrivalActivity extends BaseActivity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);	
 			 
@@ -207,7 +213,9 @@ public class PreArrivalActivity extends BaseActivity {
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				Toast.makeText(getApplicationContext(), " no 3g or wifi content", 1000).show();
 			}
 		});

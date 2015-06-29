@@ -9,5 +9,7 @@
     <string name="xlistview_header_last_time">last updates：</string>
     <string name="xlistview_footer_hint_normal">More</string>
     <string name="xlistview_footer_hint_ready">More</string>
+    
+      <string name="loading_data">加载数据...</string>
 </resources>
  

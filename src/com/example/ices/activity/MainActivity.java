@@ -10,6 +10,7 @@ import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
  
+import com.examlpe.ices.util.LoadingDialog;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
 import com.example.ices.MyApplication;
@@ -21,6 +22,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
  
  
+import android.app.Dialog;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -52,6 +54,7 @@ public class MainActivity extends BaseActivity {
 	private SharedPreferences mySharedPreferences;
 	private Editor editor;
 	private  Boolean isQuit=false;
+    private Dialog loadingDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +110,8 @@ public class MainActivity extends BaseActivity {
 		 
 	}
 	private void getData() {
- 
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("studentId", MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken()); 
@@ -119,6 +123,9 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				// TODO Auto-generated method stub
 				String userMsg = new String(responseBody).toString();
 				System.out.println("userMsg`` `" + userMsg);
@@ -149,7 +156,9 @@ public class MainActivity extends BaseActivity {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

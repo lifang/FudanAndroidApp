@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.examlpe.ices.util.DialogUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.examlpe.ices.util.Tools;
 import com.examlpe.ices.util.XListView;
@@ -54,7 +55,9 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 	private int rows = Config.ROWS;
 	private LinearLayout eva_nodata;
 	private boolean onRefresh_number = true;
+	private boolean isFirstCreate;
 	private MessageAdapter myAdapter;
+	private Dialog loadingDialog;
 	private int type = 2;// 新消息1、最近2、所有3
 	private TextView suer, titleback_text_title;
 	private PopupWindow menuWindow;
@@ -73,8 +76,8 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 						showdilog.setVisibility(View.GONE);
 					} else {
 						showdilog.setVisibility(View.VISIBLE);
-						titleback_text_title.setText(myList.size() + "   " + "unread");
 					}
+					titleback_text_title.setText(myList.size() + "   " + "unread");
 				} else {
 					showdilog.setVisibility(View.GONE);
 				}
@@ -111,6 +114,7 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.message);
+		isFirstCreate=true;
 		innitView();
 		title = getIntent().getIntExtra("code", 0);
 		new TitleMenuUtil(MessageActivity.this, "").show();
@@ -128,11 +132,25 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 
 		getData();
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
 
+		if(!isFirstCreate){
+			if (type == 1) {
+				page = 1;
+				myList.clear();
+				getData();
+			}
+		}else {
+			isFirstCreate=false;
+		}
+
+	}
 	private void innitView() {
 		// TODO Auto-generated method stub
 		suer = (TextView) findViewById(R.id.next_sure);
-		 
+
 		titleback_text_title = (TextView) findViewById(R.id.titleback_text_title);
 		suer.setVisibility(View.VISIBLE);
 		suer.setOnClickListener(new OnClickListener() {
@@ -155,17 +173,17 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Dialog ddd = new DialogUtil(MessageActivity.this,
-						"确认删除").getCheck(new CallBackChange() {
+						"Mark all as read?").getCheck(new CallBackChange() {
 
-					@Override
-					public void change() {
-						// TODO Auto-generated method stub
-						// Toast.makeText(getApplication(), "DOOOO",
-						// 1000).show();
-						readAll();
-					}
+							@Override
+							public void change() {
+								// TODO Auto-generated method stub
+								// Toast.makeText(getApplication(), "DOOOO",
+								// 1000).show();
+								readAll();
+							}
 
-				});
+						});
 				ddd.show();
 			}
 		});
@@ -233,18 +251,15 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 	}
 
 	private void readAll() {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
-	 
 		RequestParams params = new RequestParams();
 
 		params.put("studentId", MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken());
 
-		 
+
 		params.setUseJsonStreamer(true);
 		System.out.println("MyApplication.currentUser.getStudentId()---"
 				+ MyApplication.currentUser.getStudentId());
@@ -256,60 +271,64 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 				+ MyApplication.getToken());
 
 		MyApplication
-				.getInstance()
-				.getClient()
-				.post(Config.readAllNotification, params,
-						new AsyncHttpResponseHandler() {
+		.getInstance()
+		.getClient()
+		.post(Config.readAllNotification, params,
+				new AsyncHttpResponseHandler() {
 
-							@Override
-							public void onSuccess(int statusCode,
-									Header[] headers, byte[] responseBody) {
-								// TODO Auto-generated method stub
-								String userMsg = new String(responseBody)
-										.toString();
-								Log.i("ljp", userMsg);
-								Gson gson = new Gson();
-								// EventEntity
-								JSONObject jsonobject = null;
-								int code = 0;
-								try {
-									jsonobject = new JSONObject(userMsg);
-									code = jsonobject.getInt("code");
-									if (code == -2) {
-										Intent i = new Intent(getApplication(),
-												LoginActivity.class);
-										startActivity(i);
-										finish();
-									} else if (code == 0) {
-										Toast.makeText(
-												getApplicationContext(),
-												jsonobject.getString("message"),
-												Toast.LENGTH_SHORT).show();
-										titleback_text_title.setText(0 + "   " + "unread");
-									//	type = 2;
-										showdilog.setVisibility(View.GONE);
-										eva_nodata.setVisibility(View.VISIBLE);
-									 
-									} else {
-										Toast.makeText(
-												getApplicationContext(),
-												jsonobject.getString("message"),
-												Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
+			@Override
+			public void onSuccess(int statusCode,
+					Header[] headers, byte[] responseBody) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
+				String userMsg = new String(responseBody)
+				.toString();
+				Log.i("ljp", userMsg);
+				Gson gson = new Gson();
+				// EventEntity
+				JSONObject jsonobject = null;
+				int code = 0;
+				try {
+					jsonobject = new JSONObject(userMsg);
+					code = jsonobject.getInt("code");
+					if (code == -2) {
+						Intent i = new Intent(getApplication(),
+								LoginActivity.class);
+						startActivity(i);
+						finish();
+					} else if (code == 0) {
+						Toast.makeText(
+								getApplicationContext(),
+								jsonobject.getString("message"),
+								Toast.LENGTH_SHORT).show();
+						titleback_text_title.setText(0 + "   " + "unread");
+						//	type = 2;
+						showdilog.setVisibility(View.GONE);
+						eva_nodata.setVisibility(View.VISIBLE);
 
-							@Override
-							public void onFailure(int statusCode,
-									Header[] headers, byte[] responseBody,
-									Throwable error) {
-								// TODO Auto-generated method stub
+					} else {
+						Toast.makeText(
+								getApplicationContext(),
+								jsonobject.getString("message"),
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
-							}
-						});
+			@Override
+			public void onFailure(int statusCode,
+					Header[] headers, byte[] responseBody,
+					Throwable error) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
+
+			}
+		});
 	}
 
 	public void menu_press() {
@@ -385,18 +404,15 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 		// int hight = findViewById(R.id.main_top).getHeight()
 		// + Tools.getStatusBarHeight(getApplicationContext());
 		menuWindow.showAsDropDown(this.findViewById(R.id.next_sure),0,10);
-//		menuWindow.showAtLocation(this.findViewById(R.id.next_sure),
-//				Gravity.TOP | Gravity.RIGHT, 50, 100);
+		//		menuWindow.showAtLocation(this.findViewById(R.id.next_sure),
+		//				Gravity.TOP | Gravity.RIGHT, 50, 100);
 	}
 
 	private void getData() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		AsyncHttpClient client = new AsyncHttpClient(); // 创建异步请求的客户端对象
-		 
+
 		RequestParams params = new RequestParams();
 
 		params.put("studentId", MyApplication.currentUser.getStudentId());
@@ -416,66 +432,70 @@ public class MessageActivity extends BaseActivity implements IXListViewListener 
 				+ MyApplication.getToken());
 
 		MyApplication
-				.getInstance()
-				.getClient()
-				.post(Config.getNotifications, params,
-						new AsyncHttpResponseHandler() {
+		.getInstance()
+		.getClient()
+		.post(Config.getNotifications, params,
+				new AsyncHttpResponseHandler() {
 
-							@Override
-							public void onSuccess(int statusCode,
-									Header[] headers, byte[] responseBody) {
-								// TODO Auto-generated method stub
-								String userMsg = new String(responseBody)
-										.toString();
-								Log.i("ljp", userMsg);
-								Gson gson = new Gson();
-								// EventEntity
-								JSONObject jsonobject = null;
-								int code = 0;
-								try {
-									jsonobject = new JSONObject(userMsg);
-									code = jsonobject.getInt("code");
-									if (code == -2) {
-										Intent i = new Intent(getApplication(),
-												LoginActivity.class);
-										startActivity(i);
-										finish();
-									} else if (code == 0) {
-										moreList.clear();
-										moreList = gson.fromJson(
-												jsonobject.getString("result"),
-												new TypeToken<List<NotifiEntity>>() {
-												}.getType());
+			@Override
+			public void onSuccess(int statusCode,
+					Header[] headers, byte[] responseBody) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
+				String userMsg = new String(responseBody)
+				.toString();
+				Log.i("ljp", userMsg);
+				Gson gson = new Gson();
+				// EventEntity
+				JSONObject jsonobject = null;
+				int code = 0;
+				try {
+					jsonobject = new JSONObject(userMsg);
+					code = jsonobject.getInt("code");
+					if (code == -2) {
+						Intent i = new Intent(getApplication(),
+								LoginActivity.class);
+						startActivity(i);
+						finish();
+					} else if (code == 0) {
+						moreList.clear();
+						moreList = gson.fromJson(
+								jsonobject.getString("result"),
+								new TypeToken<List<NotifiEntity>>() {
+								}.getType());
 
-										if (moreList.size() == 0) {
-											Toast.makeText(
-													getApplicationContext(),
-													"no more data",
-													Toast.LENGTH_SHORT).show();
-											event_listview.getmFooterView()
-													.setState2(2);
-										}
-										myList.addAll(moreList);
-										handler.sendEmptyMessage(0);
-									} else {
-										Toast.makeText(
-												getApplicationContext(),
-												jsonobject.getString("message"),
-												Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
+						if (moreList.size() == 0) {
+							Toast.makeText(
+									getApplicationContext(),
+									"no more data",
+									Toast.LENGTH_SHORT).show();
+							event_listview.getmFooterView()
+							.setState2(2);
+						}
+						myList.addAll(moreList);
+						handler.sendEmptyMessage(0);
+					} else {
+						Toast.makeText(
+								getApplicationContext(),
+								jsonobject.getString("message"),
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
-							@Override
-							public void onFailure(int statusCode,
-									Header[] headers, byte[] responseBody,
-									Throwable error) {
-								// TODO Auto-generated method stub
+			@Override
+			public void onFailure(int statusCode,
+					Header[] headers, byte[] responseBody,
+					Throwable error) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 
-							}
-						});
+			}
+		});
 	}
 }

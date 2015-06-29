@@ -6,6 +6,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -22,6 +23,7 @@ import android.widget.Toast;
  
 import com.baidu.android.pushservice.PushManager;
 import com.examlpe.ices.util.ClientUpdate;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -40,6 +42,7 @@ public class More extends BaseActivity {
 	private LinearLayout login_linear_exit;
 	private SharedPreferences mySharedPreferences;
 	private Editor editor;
+    private Dialog loadingDialog;
 	//    //	 Intent i =new Intent(More.this,MainActivity.class);
 		// startActivity(i);
      //  finish();
@@ -136,7 +139,8 @@ public class More extends BaseActivity {
 	}
 
 	private void exit() {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 	 	AsyncHttpClient client = new AsyncHttpClient(); //  
 		RequestParams params = new RequestParams();
 		//activation
@@ -153,7 +157,9 @@ public class More extends BaseActivity {
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
-			 
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			 	String responseMsg = new String(responseBody).toString();
 			 	System.out.println("MSG" + responseMsg);			
 				Gson gson = new Gson();
@@ -196,7 +202,9 @@ public class More extends BaseActivity {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 	}

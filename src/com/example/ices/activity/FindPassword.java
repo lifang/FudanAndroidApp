@@ -5,6 +5,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
@@ -54,6 +56,7 @@ public class FindPassword extends BaseActivity   {
 	public  String vcode="";
 	private String url,email,pass;
 	private Runnable runnable;
+    private Dialog loadingDialog;
     final Handler handler = new Handler(){          // handle  
         public void handleMessage(Message msg){  
             switch (msg.what) {  
@@ -210,7 +213,8 @@ public class FindPassword extends BaseActivity   {
 
 	private void sure() {
 		// TODO Auto-generated method stub
- 
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("studentPassword",pass);
 		params.put("activationCode",vcode); 
@@ -227,7 +231,9 @@ public class FindPassword extends BaseActivity   {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);	
 				System.out.println("headers" + headers.toString());	
@@ -261,7 +267,9 @@ public class FindPassword extends BaseActivity   {
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				System.out.println("eee" + responseBody.toString());	
 			}
 		});
@@ -272,7 +280,8 @@ public class FindPassword extends BaseActivity   {
 	 * 获取验证码
 	 */
 	private void getCode() {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
  		ll_msg.setVisibility(View.VISIBLE);
 		tv_count.setText("" +60);  
 		tv_code.setText("Resent Code");
@@ -291,7 +300,9 @@ public class FindPassword extends BaseActivity   {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);			
 				Gson gson = new Gson();
@@ -330,7 +341,9 @@ public class FindPassword extends BaseActivity   {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
  

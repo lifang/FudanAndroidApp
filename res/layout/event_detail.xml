@@ -53,7 +53,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/title_time"
             android:gravity="center"
-            android:text="123123" />
+            android:text="" />
     </RelativeLayout>
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="123123"
+            android:text=""
             android:textColor="@color/C012642"
             android:textSize="17sp" />
 
@@ -87,7 +87,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="@color/C464545"
-            android:text="123123"
+            android:text=""
             android:textSize="8sp" />
     </LinearLayout>
 
@@ -129,7 +129,7 @@
             android:id="@+id/location"    
              android:textColor="@color/C012642"   
             android:gravity="center"
-            android:text="123123"
+            android:text=""
             android:textSize="12sp" />
 		    
 		    
@@ -184,7 +184,7 @@
             android:textColor="@color/C012642"
            	android:id="@+id/tv_tel"
             android:gravity="center"
-            android:text="123123"
+            android:text=""
             android:textSize="12sp" />
 		    
 		    
@@ -232,7 +232,7 @@
             android:id="@+id/tv_cost"
            android:textColor="@color/C012642"
             android:gravity="center"
-            android:text="123123"
+            android:text=""
             android:textSize="12sp" />
 		    
 		    
@@ -249,7 +249,7 @@
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginTop="5dp"
-        android:text="12323133333333333333333123"
+        android:text=""
         android:textColor="@color/C464545"
         android:textSize="16sp" />
 

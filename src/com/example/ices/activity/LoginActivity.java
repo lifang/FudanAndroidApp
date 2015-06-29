@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Application;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
  
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
@@ -54,7 +56,8 @@ public class LoginActivity extends BaseActivity{
 	private TextView tv_password,titleback_text_title;
 	private String name,pass,url,deviceToken;
 	private SharedPreferences mySharedPreferences;
-	private Editor editor;
+	private Editor editor; 
+	private Dialog loadingDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -214,6 +217,8 @@ public class LoginActivity extends BaseActivity{
 	 */
 	private void login(String name2, String pass2) {
 		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		 AsyncHttpClient client = new AsyncHttpClient(); //  
 	 
 		RequestParams params = new RequestParams();
@@ -231,6 +236,9 @@ public class LoginActivity extends BaseActivity{
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				System.out.println("login---" +  new String(responseBody).toString());	
 				 
 				///String re = new String(responseBody).toString();
@@ -285,6 +293,9 @@ public class LoginActivity extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				login_linear_signin.setClickable(true);
 				Toast.makeText(getApplicationContext(), "«ÎºÏ≤ÈÕ¯¬ÁŒ Ã‚",
 						Toast.LENGTH_SHORT).show();

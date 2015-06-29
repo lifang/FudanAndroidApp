@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.examlpe.ices.util.DialogUtil;
 import com.examlpe.ices.util.DialogUtil.CallBackChange;
 import com.examlpe.ices.util.ImageCacheUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
  
 import com.example.ices.BaseActivity;
@@ -79,7 +80,7 @@ public class ImgShow extends BaseActivity{
 	private RelativeLayout rl_imgs,rela_loc;
 	private int  index_ima=0;
 	private int index=0;
- 
+    private Dialog loadingDialog;
 	private String phoneNumber,locName;
 	private float lat,lng;
 	List<View> list = new ArrayList<View>();
@@ -249,7 +250,8 @@ private void initIndicator(){
 		 */
 		@Override
 		public Object instantiateItem(final ViewGroup container, final int position) {
-			
+			loadingDialog = LoadingDialog.getLoadingDialg(ImgShow.this);
+			loadingDialog.show();
 			AsyncHttpClient client = new AsyncHttpClient(); // 
 			View view = mList.get(position);
 			image = ((ImageView) view.findViewById(R.id.image));
@@ -257,6 +259,9 @@ private void initIndicator(){
 			client.post(ma.get(position), new AsyncHttpResponseHandler(){  
 		           @Override  
 		           public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {  
+		        		if (loadingDialog != null) {
+							loadingDialog.dismiss();
+						}
 		               if(statusCode==200){  
 		                   BitmapFactory factory=new BitmapFactory();  
 		                   Bitmap bitmap=factory.decodeByteArray(responseBody, 0, responseBody.length);  
@@ -271,6 +276,9 @@ private void initIndicator(){
 		           public void onFailure(int statusCode, Header[] headers,  
 		                   byte[] responseBody, Throwable error) {  
 		               error.printStackTrace();  
+		           	if (loadingDialog != null) {
+						loadingDialog.dismiss();
+					}
 		           }  
 		       });  
  		

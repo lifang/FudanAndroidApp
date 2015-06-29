@@ -23,7 +23,7 @@
             android:id="@+id/expand_child_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tittt"
+            android:text=""
             android:textSize="17sp"/>
     </LinearLayout>
      	<view android:layout_height="0.5dp"

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -43,7 +45,7 @@ public class MuneContnet extends BaseActivity {
 	private MyExpandableListAdapter myAdapter;
 	private ImageView for_campus;
 	private String title;
-
+    private Dialog loadingDialog;
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -166,9 +168,8 @@ public class MuneContnet extends BaseActivity {
 	}
 
 	private void getdata() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		// AsyncHttpClient client = new AsyncHttpClient(); //
 		RequestParams params = new RequestParams();
 
@@ -187,7 +188,9 @@ public class MuneContnet extends BaseActivity {
 							@Override
 							public void onSuccess(int statusCode,
 									Header[] headers, byte[] responseBody) {
-								// TODO Auto-generated method stub
+								if (loadingDialog != null) {
+									loadingDialog.dismiss();
+								}
 								String responseMsg = new String(responseBody)
 										.toString();
 								System.out.println("MSG" + responseMsg);
@@ -239,7 +242,9 @@ public class MuneContnet extends BaseActivity {
 							public void onFailure(int statusCode,
 									Header[] headers, byte[] responseBody,
 									Throwable error) {
-								// TODO Auto-generated method stub
+								if (loadingDialog != null) {
+									loadingDialog.dismiss();
+								}
 								Toast.makeText(getApplicationContext(),
 										"ÍøÂçÁ¬½Ó´íÎó", 1000).show();
 							}

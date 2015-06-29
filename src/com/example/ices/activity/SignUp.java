@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
  
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
@@ -47,6 +49,7 @@ public class SignUp extends BaseActivity{
 	login_linear_deletpass2,login_linear_deletkey,login_linear_signup;
 	private EditText login_edit_time,login_edit_eamil,login_edit_pass1,login_edit_pass2,login_edit_key;
 	private String code,email,pass1,pass2,mobile="",url;
+    private Dialog loadingDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -96,7 +99,8 @@ public class SignUp extends BaseActivity{
 	 * @param studentPassword  º”√‹µƒ√‹¬Î
 	 */
 	private void signUp(String activation,String url,String studentMobilePhone,String studentEmail,String studentPassword) {
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		//AsyncHttpClient client = new AsyncHttpClient(); //  
 		RequestParams params = new RequestParams();
 		params.put("activationCode",activation);
@@ -110,7 +114,9 @@ public class SignUp extends BaseActivity{
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);			
 				Gson gson = new Gson();
@@ -143,7 +149,9 @@ public class SignUp extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

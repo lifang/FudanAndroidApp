@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.examlpe.ices.util.ImageCacheUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
  
 import com.example.ices.BaseActivity;
@@ -40,6 +41,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.zf.myandroidtest_85_photoview.VPImage;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -76,6 +78,7 @@ public class MessageDetail extends BaseActivity {
 	private RelativeLayout rl_imgs;
  
 	private LinearLayout ll_Go;
+    private Dialog loadingDialog;
 	// 图片的地址，这里可以从服务器获取
 	private WebView wbview_show;
 	private ArrayList<String> ma = new ArrayList<String>();
@@ -450,7 +453,8 @@ public class MessageDetail extends BaseActivity {
 	}
 	
 	private void getData() {
-
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("id", id);
 		params.put("studentId", MyApplication.currentUser.getStudentId()); 
@@ -461,7 +465,9 @@ public class MessageDetail extends BaseActivity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String userMsg = new String(responseBody).toString();
 				System.out.println("userMsg`` `" + userMsg);
 			 
@@ -520,7 +526,9 @@ public class MessageDetail extends BaseActivity {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

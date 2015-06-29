@@ -7,16 +7,18 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.examlpe.ices.util.Tools;
 import com.examlpe.ices.util.XListView;
@@ -26,9 +28,7 @@ import com.example.ices.Config;
 import com.example.ices.MyApplication;
 import com.example.ices.R;
 import com.example.ices.adapter.AroundAdapter;
-import com.example.ices.adapter.EventAdapter;
 import com.example.ices.entity.AroundEntity;
-import com.example.ices.entity.EventlistEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -44,6 +44,7 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
 	private boolean onRefresh_number = true;
 	private AroundAdapter myAdapter;
 	private int type=1;
+    private Dialog loadingDialog;
 	 
 	List<AroundEntity>  myList = new ArrayList<AroundEntity>();
 	List<AroundEntity>  moreList = new ArrayList<AroundEntity>();
@@ -171,9 +172,8 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
 		getData();
 	}
 	private void getData() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(AroundList.this);
+		loadingDialog.show();
 		//AsyncHttpClient client = new rows(); //  
 		RequestParams params = new RequestParams();
 		params.put("rows",rows);
@@ -187,14 +187,18 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
  
 	 
 		MyApplication.getInstance().getClient().post(Config.getArounds, params, new AsyncHttpResponseHandler() {
-
+		
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);	
-			 
+				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
+				
 				Gson gson = new Gson();
 				JSONObject jsonobject = null;
 				int code = 0;
@@ -242,7 +246,9 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				System.out.println("eee" + responseBody.toString());	
 			}
 		});

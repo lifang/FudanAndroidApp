@@ -8,6 +8,8 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -75,6 +78,8 @@ OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 		private AutoCompleteTextView keyWorldsView = null;
 		private ArrayAdapter<String> sugAdapter = null;
 		private int load_Index = 0;
+		
+		private Dialog dialog;
 
 		List<PoiInfo>  myList = new ArrayList<PoiInfo>();
 		List<PoiInfo>  moreList = new ArrayList<PoiInfo>();
@@ -241,7 +246,20 @@ OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 			myList.clear();
 			getData();
 		}
+		
+		private void loadingDialog(Activity activity) {
+			dialog = new Dialog(activity, R.style.LoadingDialog);
+			dialog.setCancelable(false);
+			dialog.setContentView(R.layout.dialog_dark);
+
+			TextView titleText = (TextView) dialog.findViewById(R.id.dialog_text);
+			titleText.setText(activity.getString(R.string.loading_data));
+
+		}
+		
 		private void getData() { 
+			loadingDialog(this);
+			dialog.show();
 			System.out.println("page--"+page);
 			mPoiSearch.searchNearby(new PoiNearbySearchOption().location(ptCenter).keyword(type).radius(3000).pageNum(page));
 		}
@@ -258,10 +276,16 @@ OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 		@Override
 		public void onGetPoiResult(PoiResult result) {
 			// TODO Auto-generated method stub
+			if (dialog != null) {
+				dialog.dismiss();
+			}
 			if (result == null
 					|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
-				Toast.makeText(SearchAround.this, "未找到结果 1", Toast.LENGTH_LONG)
+//				Toast.makeText(SearchAround.this, "未找到结果 1", Toast.LENGTH_LONG)
+//				.show();
+				Toast.makeText(SearchAround.this, "no more data", Toast.LENGTH_LONG)
 				.show();
+				handler.sendEmptyMessage(0);
 				return;
 			}
 			if (result.error == SearchResult.ERRORNO.NO_ERROR) {

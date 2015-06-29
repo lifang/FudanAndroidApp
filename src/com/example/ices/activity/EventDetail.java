@@ -50,16 +50,17 @@ import android.widget.Toast;
 import com.examlpe.ices.util.DialogUtil;
 import com.examlpe.ices.util.DialogUtil.CallBackChange;
 import com.examlpe.ices.util.ImageCacheUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.examlpe.ices.util.TitleMenuUtil;
- 
+
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
 import com.example.ices.MyApplication;
 import com.example.ices.R;
 import com.example.ices.activity.PreDetail.AsyncImageLoader;
- 
- 
+
+
 import com.example.ices.activity.PreDetail.AsyncImageLoader.ImageCallback;
 import com.example.ices.baidu.BigImageShow;
 import com.example.ices.entity.EventDetailEneity;
@@ -87,11 +88,12 @@ public class EventDetail extends BaseActivity{
 	private LayoutInflater inflater;
 	private RelativeLayout rl_imgs;
 	private int  index_ima=0;
- 
+
 	private int isjion;
 	private String finishTime;
 	private TextView tv_isjoin;
 	String url;
+    private Dialog loadingDialog;
 	List<View> list = new ArrayList<View>();
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -101,18 +103,18 @@ public class EventDetail extends BaseActivity{
 				 * 创建多个item （每一条viewPager都是一个item）
 				 * 从服务器获取完数据（如文章标题、url地址） 后，再设置适配器
 				 */
- 
+
 				for (int i = 0; i <ma.size(); i++) {			 
 					item = inflater.inflate(R.layout.item, null);
 					list.add(item);
 				}
- 
+
 				indicator_imgs	= new ImageView[ma.size()];
-			 
+
 				initIndicator();
-			 
-				 adapter.notifyDataSetChanged();
-				 
+
+				adapter.notifyDataSetChanged();
+
 				break;
 			case 1:
 				Toast.makeText(getApplicationContext(), (String) msg.obj,
@@ -123,10 +125,10 @@ public class EventDetail extends BaseActivity{
 						Toast.LENGTH_SHORT).show();
 				break;
 			case 3:
-			 
+
 				break;
 			case 4:
-			 
+
 				break;
 			}
 		}
@@ -142,11 +144,11 @@ public class EventDetail extends BaseActivity{
 		url=	Config.getEvent;
 		getdata(url);
 		//DialogUtil
-//		testimg=(ImageView) findViewById(R.id.testimg);
-// 		ImageCacheUtil.IMAGE_CACHE.get( "http://p2.gexing.com/qqpifu/20121208/0612/50c269e15585a.jpg",
-// 				testimg);
+		//		testimg=(ImageView) findViewById(R.id.testimg);
+		// 		ImageCacheUtil.IMAGE_CACHE.get( "http://p2.gexing.com/qqpifu/20121208/0612/50c269e15585a.jpg",
+		// 				testimg);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -156,12 +158,12 @@ public class EventDetail extends BaseActivity{
 	}
 	private void innitView() {
 		// TODO Auto-generated method stub
-		
+
 		// p = new URLImageParser(more_tv_detail, EventDetail.this);
 		rl_imgs=(RelativeLayout) findViewById(R.id.rl_imgs);
 
 		view_pager = (ViewPager) findViewById(R.id.view_pager);
-		 
+
 		inflater = LayoutInflater.from(this);
 		adapter = new MyAdapter(list);
 		tv_isjoin=(TextView) findViewById(R.id.tv_isjoin);
@@ -177,72 +179,70 @@ public class EventDetail extends BaseActivity{
 		tv_detail=(TextView) findViewById(R.id.tv_detail);
 		ll_join=(LinearLayout) findViewById(R.id.ll_join);
 		ll_join.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				 
-				 try {
-					  old =sdf.parse(finishTime);
-					 System.out.println("old```"+old.getTime());
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (null != finishTime && !"".equals(finishTime)) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+					try {
+						old =sdf.parse(finishTime);
+
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Date nowDate = Calendar.getInstance().getTime();
+
+					System.out.println("nowDate```"+nowDate.getTime());
+					if(old.getTime()<nowDate.getTime()){
+						Toast.makeText(getApplicationContext(), "Event has finished!", 1000).show();
+					}else{
+						Dialog ddd=	new DialogUtil(EventDetail.this,"Join the event?").getCheck(new CallBackChange() {
+
+							@Override
+							public void change() {
+								// TODO Auto-generated method stub
+								//	Toast.makeText(getApplication(), "DOOOO", 1000).show();
+								url=Config.joinEvent;
+
+								join(url);
+							}
+						});
+						ddd.show();
+					}
 				}
-				Date nowDate = Calendar.getInstance().getTime();
-		    
-		        System.out.println("nowDate```"+nowDate.getTime());
-				if(old.getTime()<nowDate.getTime()){
-					Toast.makeText(getApplicationContext(), "Event has finished!", 1000).show();
-				}else{
-					Dialog ddd=	new DialogUtil(EventDetail.this,"Join the event?").getCheck(new CallBackChange() {
-						
-						@Override
-						public void change() {
-							// TODO Auto-generated method stub
-						 //	Toast.makeText(getApplication(), "DOOOO", 1000).show();
-							url=Config.joinEvent;
-							 
-							join(url);
-						}
-					});
-					ddd.show();
-				}
-				
-				
-				
- 
 			}
-			
+
 		});
 		rl_tel=(RelativeLayout) findViewById(R.id.rl_tel);
 		rl_tel.setOnClickListener(new OnClickListener(
 				) {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//打电话
-			 
+
 				Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tv_tel.getText().toString()));  
-	            startActivity(intent);  
+				startActivity(intent);  
 			}
 		});
 	}
 	private void getdata(String url) {
 		// TODO Auto-generated method stub
- 
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("id",id);
 		params.put("studentId",MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken()); 
 		params.setUseJsonStreamer(true);
 		System.out.println("MyApplication.currentUser.getStudentId()---"+id);
-		 
+
 		System.out.println("MyApplication.getToken()---"+MyApplication.getToken());
 		System.out.println("params--"+MyApplication.currentUser.getStudentId()+"---"+ MyApplication.getToken());
-		
+
 		MyApplication.getInstance().getClient().post( url, params, new AsyncHttpResponseHandler() {
 
 			@Override
@@ -250,7 +250,9 @@ public class EventDetail extends BaseActivity{
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
 				String userMsg = new String(responseBody).toString();
-	 
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				Log.i("ljp", userMsg);
 				Gson gson = new Gson();
 				//EventEntity
@@ -264,9 +266,9 @@ public class EventDetail extends BaseActivity{
 						startActivity(i);
 					}else if(code==0){
 						EventDetailEneity ee = gson.fromJson(jsonobject.getString("result"),
- 		 					new TypeToken<EventDetailEneity>() {
- 							}.getType());
-						
+								new TypeToken<EventDetailEneity>() {
+						}.getType());
+
 						eventsFinshTime.setText(StringUtil.timeUtil(ee.getEventsStartTime())+".-"+StringUtil.timeUtil(ee.getEventsFinshTime()) );
 						finishTime=ee.getEventsFinshTime();
 						creat_tv.setText("Creattime:"+ee.getCreateTime());
@@ -274,23 +276,23 @@ public class EventDetail extends BaseActivity{
 						tv_detail.setText(ee.getEventsIntroduction());
 						location.setText(ee.getEventsAddress());
 						tv_tel.setText(ee.getEventsPhone());
-					 	isjion=ee.getEventsIsJoin();
-					 	tv_cost.setText( String.valueOf(ee.getEventsCostMoney()));
-					 	
-					 	if(MyApplication.currentUser.getStudentStatus().endsWith("2")){
-						 	if(isjion==2){
-						 	 	ll_join.setClickable(false);
-						 		 tv_isjoin.setText("Joined");
-						 		ll_join.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_finish_dra));
-						 	}
-					 	}else{
-					 		ll_join.setVisibility(View.GONE);
-					 	}
-					 	
-				 
+						isjion=ee.getEventsIsJoin();
+						tv_cost.setText( String.valueOf(ee.getEventsCostMoney()));
+
+						if(MyApplication.currentUser.getStudentStatus().endsWith("2")){
+							if(isjion==2){
+								ll_join.setClickable(false);
+								tv_isjoin.setText("Joined");
+								ll_join.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_finish_dra));
+							}
+						}else{
+							ll_join.setVisibility(View.GONE);
+						}
+
+
 						for(int i=0;i<ee.getPictures().size();i++){
 							ma.add(Config.IMAGE_PATH+ee.getPictures().get(i).getPictureLargeFilePath());
-						//	ma.add("http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png");
+							//	ma.add("http://su.bdimg.com/static/superplus/img/logo_white_ee663702.png");
 							mal.add(ee.getPictures().get(i).getPictureLargeFilePath());
 						}
 						handler.sendEmptyMessage(0);
@@ -302,42 +304,47 @@ public class EventDetail extends BaseActivity{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 
-				
+
+
 			}
 
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 
-	
-	
+
+
 	}
 	private void join(String url) {
 		// TODO Auto-generated method stub
- 
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("id",id);
 		params.put("studentId",MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken()); 
 		params.setUseJsonStreamer(true);
 		System.out.println("MyApplication.currentUser.getStudentId()---"+id);
-		 
+
 		System.out.println("MyApplication.getToken()---"+MyApplication.getToken());
 		System.out.println("params--"+MyApplication.currentUser.getStudentId()+"---"+ MyApplication.getToken());
-		
+
 		MyApplication.getInstance().getClient().post( url, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String userMsg = new String(responseBody).toString();
-	 
+
 				Log.i("ljp", userMsg);
 				Gson gson = new Gson();
 				//EventEntity
@@ -351,56 +358,58 @@ public class EventDetail extends BaseActivity{
 						startActivity(i);
 					}else if(code==0){
 						Toast.makeText(getApplicationContext(), jsonobject.getString("message"),
- 							Toast.LENGTH_SHORT).show();
+								Toast.LENGTH_SHORT).show();
 						ll_join.setClickable(false);
-				 		tv_isjoin.setText("Joined");
-				 		ll_join.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_finish_dra));
- 					}
+						tv_isjoin.setText("Joined");
+						ll_join.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_finish_dra));
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 
-				
+
+
 			}
 
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
+
 			}
 		});
 
-	
-	
+
+
 	}
-private void initIndicator(){
-		
+	private void initIndicator(){
+
 		ImageView imgView;
 		View v = findViewById(R.id.indicator);// 线性水平布局，负责动态调整导航图标
-		
+
 		for (int i = 0; i < ma.size(); i++) {
 			imgView = new ImageView(this);
 			LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(10,10);
 			params_linear.setMargins(7, 0, 7, 20);
 			imgView.setLayoutParams(params_linear);
 			indicator_imgs[i] = imgView;
-			
+
 			if (i == 0) { // 初始化第一个为选中状态
-				
+
 				indicator_imgs[i].setBackgroundResource(R.drawable.indicator_focused);
 			} else {
 				indicator_imgs[i].setBackgroundResource(R.drawable.indicator);
 			}
 			((ViewGroup)v).addView(indicator_imgs[i]);
 		}
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * 适配器，负责装配 、销毁  数据  和  组件 。
 	 */
@@ -408,17 +417,17 @@ private void initIndicator(){
 
 		private List<View> mList;
 		private int index ;
-		
+
 		private AsyncImageLoader asyncImageLoader;
-		
+
 		public MyAdapter(List<View> list) {
 			mList = list;
 			asyncImageLoader = new AsyncImageLoader();  
 		}
 
-		
-		
- 
+
+
+
 
 
 
@@ -431,7 +440,7 @@ private void initIndicator(){
 			return mList.size();
 		}
 
-		
+
 		/**
 		 * Remove a page for the given position.
 		 * 滑动过后就销毁 ，销毁当前页的前一个的前一个的页！
@@ -442,7 +451,7 @@ private void initIndicator(){
 		public void destroyItem(ViewGroup container, int position, Object object) {
 			// TODO Auto-generated method stub
 			container.removeView(mList.get(position));
-			
+
 		}
 
 		@Override
@@ -451,43 +460,43 @@ private void initIndicator(){
 			return arg0==arg1;
 		}
 
-		
+
 		/**
 		 * Create the page for the given position.
 		 */
 		@Override
 		public Object instantiateItem(final ViewGroup container, final int position) {
-			
- 
+
+
 			View view = mList.get(position);
 			image = ((ImageView) view.findViewById(R.id.image));
 			ImageCacheUtil.IMAGE_CACHE.get(  ma.get(position),
-	 				image);
+					image);
 			container.removeView(mList.get(position));
 			container.addView(mList.get(position));
 			image.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-				//	 Toast.makeText(getApplicationContext(), index_ima+"----", 1000).show();
-					 Intent i=new Intent(EventDetail.this,VPImage.class);
+					//	 Toast.makeText(getApplicationContext(), index_ima+"----", 1000).show();
+					Intent i=new Intent(EventDetail.this,VPImage.class);
 					// i.putExtra("image_url", ma.get(index_ima));
-					 i.putExtra("mal", mal);
-					 i.putExtra("index", index_ima);
-					 startActivityForResult(i, 9);
+					i.putExtra("mal", mal);
+					i.putExtra("index", index_ima);
+					startActivityForResult(i, 9);
 				}
 			});
-		  
-		 
-			
+
+
+
 			return mList.get(position);
 		}
-		
-	
+
+
 	}
-	
-	
+
+
 	/**
 	 * 动作监听器，可异步加载图片
 	 *
@@ -502,32 +511,32 @@ private void initIndicator(){
 			}
 		}
 
-		
+
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onPageSelected(int position) {
-			
+
 			// 改变所有导航的背景图片为：未选中
 			for (int i = 0; i < indicator_imgs.length; i++) {
-				
+
 				indicator_imgs[i].setBackgroundResource(R.drawable.indicator);
-				 
+
 			}
-			
+
 			// 改变当前背景图片为：选中
 			index_ima=position;
 			indicator_imgs[position].setBackgroundResource(R.drawable.indicator_focused);
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 
 	/**
 	 * 异步加载图片
@@ -548,7 +557,7 @@ private void initIndicator(){
 			public void imageLoaded(Drawable imageDrawable, String imageUrl);
 		}
 
-		
+
 		/**
 		 * 创建子线程加载图片
 		 * 子线程加载完图片交给handler处理（子线程不能更新ui，而handler处在主线程，可以更新ui）
@@ -560,7 +569,7 @@ private void initIndicator(){
 		 */
 		public Drawable loadDrawable(final String imageUrl,
 				final ImageCallback imageCallback) {
-			
+
 			//如果缓存中存在图片  ，则首先使用缓存
 			if (imageCache.containsKey(imageUrl)) {
 				SoftReference<Drawable> softReference = imageCache.get(imageUrl);
@@ -580,7 +589,7 @@ private void initIndicator(){
 				}
 			};
 
-			
+
 			/**
 			 * 创建子线程访问网络并加载图片 ，把结果交给handler处理
 			 */
@@ -594,11 +603,11 @@ private void initIndicator(){
 					handler.sendMessage(message);
 				}
 			}.start();
-			
+
 			return null;
 		}
 
-		
+
 		/**
 		 * 下载图片  （注意HttpClient 和httpUrlConnection的区别）
 		 */

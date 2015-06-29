@@ -7,6 +7,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -33,7 +35,7 @@ public class Around extends BaseActivity{
 	private RelativeLayout main_rl_Food,main_rl_drink,main_rl_sport,main_rl_sm,main_rl_sb,main_post,
 	main_rl_other,  main_rl_Hotel;
 	private String url;
- 
+	  private Dialog loadingDialog;
 	private List<EventEntity>list1 = new ArrayList<EventEntity>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +54,9 @@ public class Around extends BaseActivity{
 		//getData();
 	}
 	private void getData() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
+		
 		AsyncHttpClient client = new AsyncHttpClient(); // 创建异步请求的客户端对象
 		RequestParams params = new RequestParams();
  
@@ -73,7 +75,9 @@ public class Around extends BaseActivity{
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
 				String userMsg = new String(responseBody).toString();
-	 
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				Log.i("ljp", userMsg);
 				Gson gson = new Gson();
 				//EventEntity
@@ -106,7 +110,9 @@ public class Around extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

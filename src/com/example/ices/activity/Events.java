@@ -9,6 +9,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
  
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -37,6 +39,7 @@ public class Events extends BaseActivity{
 	private RelativeLayout main_rl_lec,main_rl_trl,main_rl_sport,main_rl_Ceremony,main_rl_sb,main_rl_Forum,
 	main_rl_la,main_rl_et,main_rl_other;
 	private String url;
+    private Dialog loadingDialog;
 	private FrameLayout f_l,f2,f3,cef_3,f4,f5,f6,f7,f8;
 	private TextView tv_l,f2_tv2,f3_tv3,cetv_3,f4_tv,f5_tv,f6_tv,f7_tv,f8_tv;
 	private List<EventEntity>list1 = new ArrayList<EventEntity>();
@@ -57,9 +60,8 @@ public class Events extends BaseActivity{
 		getData();
 	}
 	private void getData() {
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		AsyncHttpClient client = new AsyncHttpClient(); // 创建异步请求的客户端对象
 		RequestParams params = new RequestParams();
  
@@ -76,7 +78,9 @@ public class Events extends BaseActivity{
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String userMsg = new String(responseBody).toString();
 	 
 				Log.i("ljp", userMsg);
@@ -184,7 +188,9 @@ public class Events extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-				
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

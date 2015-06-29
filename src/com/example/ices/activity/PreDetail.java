@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.examlpe.ices.util.ImageCacheUtil;
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.TitleMenuUtil;
  
 import com.example.ices.Config;
@@ -44,6 +45,7 @@ import com.zf.myandroidtest_85_photoview.VPImage;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -93,6 +95,7 @@ public class PreDetail extends Activity {
 	private View item ;
 	private MyAdapter adapter ;
 	private ImageView[] indicator_imgs  ;//存放引到图片数组
+    private Dialog loadingDialog;
 	List<View> list = new ArrayList<View>();
 	List<DCImageList> listimg=new ArrayList<DCImageList>();
 	private Handler handler = new Handler() {
@@ -542,10 +545,8 @@ public class PreDetail extends Activity {
 	}
 	
 	private void getData() {
-
-		// TODO Auto-generated method stub
-
-		// TODO Auto-generated method stub
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 	 
 		RequestParams params = new RequestParams();
 		 
@@ -562,7 +563,9 @@ public class PreDetail extends Activity {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String userMsg = new String(responseBody).toString();
 				System.out.println("userMsg`` `" + userMsg);
 			 
@@ -618,7 +621,9 @@ public class PreDetail extends Activity {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 

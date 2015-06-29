@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import com.example.ices.Config;
 import com.example.ices.MyApplication;
 import com.example.ices.R;
+import com.example.ices.activity.AroundList;
 import com.example.ices.activity.CancleUpdate;
 import com.example.ices.activity.LoginActivity;
 import com.example.ices.entity.EventDetailEneity;
@@ -34,6 +35,7 @@ import com.loopj.android.http.RequestParams;
  
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -69,7 +71,8 @@ public class ClientUpdate {
 	private Update_AsyncTask mUpdate_AsyncTask = new Update_AsyncTask();
 	public static Update_AsyncTask mUpdate;
 	private boolean isConnOk = true;// 是否连接成功
-
+	  private Dialog loadingDialog;
+	  
 	public ClientUpdate(Activity activity) {
 		this.activity = activity;
 
@@ -107,7 +110,8 @@ public class ClientUpdate {
 	// 网络获取数据检测版本
 	private void checkVersion() { 
 		getVersion();
-
+		loadingDialog = LoadingDialog.getLoadingDialg(activity);
+		loadingDialog.show();
 		String sign;
 		AsyncHttpClient client = new AsyncHttpClient(); // 创建异步请求的客户端对象
 
@@ -123,6 +127,9 @@ public class ClientUpdate {
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
 				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String response = new String(responseBody).toString();
 				Log.i("MSG", response);
 				Gson gson = new Gson();
@@ -161,6 +168,9 @@ public class ClientUpdate {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 	
@@ -235,14 +245,14 @@ public class ClientUpdate {
 	// 发送下载消息
 	private void sendNotification() {
 		mNotificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-		notification = new Notification(R.drawable.mail_icon, "ICES", System.currentTimeMillis());
+		notification = new Notification(R.drawable.leee, "ICES", System.currentTimeMillis());
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		Intent i = new Intent(activity, CancleUpdate.class);
  		i.putExtra("quxiao", "Cancle");
 			PendingIntent pendingintent = PendingIntent.getActivity(activity, 0, i, 0);
 		remoteviews = new RemoteViews(activity.getPackageName(), R.layout.my_notification);
 		remoteviews.setOnClickPendingIntent(R.id.notification_cancle, pendingintent);
-		remoteviews.setImageViewResource(R.id.logo_image, R.drawable.mail_icon);
+		remoteviews.setImageViewResource(R.id.logo_image, R.drawable.leee);
 		notification.contentView = remoteviews;
 		mNotificationManager.notify(88888, notification);
 		new Thread(new Runnable() {
@@ -329,7 +339,10 @@ public class ClientUpdate {
 					mNotificationManager.cancel(88888);
 				}
 				// 系统安装文件的隐式意图
-				Intent notify_Intent = new Intent(Intent.ACTION_VIEW);
+				//Intent notify_Intent = new Intent(Intent.ACTION_VIEW);
+				Intent notify_Intent = new Intent();
+				notify_Intent.setAction(Intent.ACTION_VIEW);
+				notify_Intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 				notify_Intent.setDataAndType(Uri.fromFile(new File(new ClientUpdate().getFilePath())), "application/vnd.android.package-archive");
 				activity.startActivity(notify_Intent);
 				Toast.makeText(activity, "Download finish", 1000).show();
@@ -364,7 +377,7 @@ public class ClientUpdate {
 				if (whitch == 0) {
 					remoteviews.setProgressBar(R.id.downProgressBar, 100, step, false);
 					remoteviews.setTextViewText(R.id.downPercent, step + "%");
-					remoteviews.setTextViewText(R.id.tv_size,nowSize+"M / "+totalSize+"M");
+					remoteviews.setTextViewText(R.id.tv_size,nowSize+"KB / "+totalSize+"M");
 					mNotificationManager.notify(88888, notification);
 				} else if (whitch == 1) {
 						//upEnDialog.setProgre(count);

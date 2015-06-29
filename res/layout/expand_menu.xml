@@ -16,7 +16,7 @@
         android:textSize="17sp"
         
         android:gravity="center_vertical"
-        android:text="one test"/>
+        android:text=""/>
 
      
         <ImageView 

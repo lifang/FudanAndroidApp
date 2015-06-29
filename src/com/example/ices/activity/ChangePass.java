@@ -4,6 +4,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.examlpe.ices.util.LoadingDialog;
 import com.examlpe.ices.util.StringUtil;
 import com.examlpe.ices.util.TitleMenuUtil;
 import com.example.ices.BaseActivity;
@@ -39,6 +41,7 @@ public class ChangePass extends BaseActivity{
 	private LinearLayout login_linear_delettel,login_linear_deletemail,login_linear_deletcode;
 	private EditText login_edit_old,login_edit_email,login_edit_code;
 	private TextView next_sure;
+    private Dialog loadingDialog;
 	private String url,studentMobilePhone,studentEmail,activation,oldPassword,newPassword;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -171,8 +174,8 @@ public class ChangePass extends BaseActivity{
 		}
 	}
 	private void save() {
-		// TODO Auto-generated method stub activation
-	 
+		loadingDialog = LoadingDialog.getLoadingDialg(this);
+		loadingDialog.show();
 		RequestParams params = new RequestParams();
 		
  
@@ -186,7 +189,9 @@ public class ChangePass extends BaseActivity{
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
-				// TODO Auto-generated method stub
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 				String responseMsg = new String(responseBody).toString();
 				System.out.println("MSG" + responseMsg);			
 				Gson gson = new Gson();
@@ -217,7 +222,9 @@ public class ChangePass extends BaseActivity{
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
-
+				if (loadingDialog != null) {
+					loadingDialog.dismiss();
+				}
 			}
 		});
 	}

@@ -59,7 +59,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="Backhanm come to china"
             android:textColor="@color/C012642"
             android:textSize="17sp" />
 
@@ -105,7 +104,7 @@
             android:id="@+id/location"    
              android:textColor="@color/C012642"   
             android:gravity="center"
-            android:text="lost angle"
+            android:text=""
             android:maxLines="1"
             android:maxLength="20"
             android:ellipsize="end"
@@ -169,7 +168,6 @@
             android:textColor="@color/C012642"
            	android:id="@+id/tv_time"
             android:gravity="center"
-            android:text="8:00-17:00"
             android:textSize="12sp" />
 		    
 		    
@@ -217,7 +215,6 @@
             android:id="@+id/tv_tel2"
            android:textColor="@color/C012642"
             android:gravity="center"
-            android:text="021-2563368"
             android:textSize="12sp" />
 		    
 		    
@@ -240,7 +237,7 @@
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
         android:layout_marginTop="5dp"
-        android:text="12323133333333333333333123"
+        android:text=""
         android:textColor="@color/C464545"
         android:textSize="16sp" />
 

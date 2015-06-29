@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="1232312312333333333333333333333333333333"
+                    android:text=""
                     android:textColor="@color/C012642"
                     android:textSize="16sp" />
 
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="123"
+                    android:text=""
                     android:textSize="8sp" />
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="22dp"
                 android:layout_marginTop="10dp"
-                android:text="1231231312312333333333333333333333333333333333333333"
+                android:text=""
                 android:textSize="16sp" />
 
             <LinearLayout
