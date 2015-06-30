@@ -249,7 +249,8 @@ public class AroundList  extends BaseActivity implements  IXListViewListener{
 				if (loadingDialog != null) {
 					loadingDialog.dismiss();
 				}
-				System.out.println("eee" + responseBody.toString());	
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	

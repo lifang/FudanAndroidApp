@@ -276,7 +276,7 @@ public class EventListActivity extends BaseActivity implements  IXListViewListen
 					loadingDialog.dismiss();
 				}
 				isRefresh = true;
-				Toast.makeText(getApplicationContext(), "Çë¼ì²éÍøÂçÎÊÌâ",
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
 						Toast.LENGTH_SHORT).show();
 			}
 		});

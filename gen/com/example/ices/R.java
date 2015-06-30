@@ -802,6 +802,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int drop_down_list_header_release_text=0x7f070002;
         public static final int image_content=0x7f070007;
         public static final int loading_data=0x7f070015;
+        public static final int no_internet=0x7f070016;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */

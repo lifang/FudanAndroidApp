@@ -245,8 +245,8 @@ public class MuneContnet extends BaseActivity {
 								if (loadingDialog != null) {
 									loadingDialog.dismiss();
 								}
-								Toast.makeText(getApplicationContext(),
-										"ÍøÂçÁ¬½Ó´íÎó", 1000).show();
+								Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+										Toast.LENGTH_SHORT).show();
 							}
 						});
 

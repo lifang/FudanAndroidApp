@@ -10,6 +10,7 @@
     <string name="xlistview_footer_hint_normal">More</string>
     <string name="xlistview_footer_hint_ready">More</string>
     
-      <string name="loading_data">加载数据...</string>
+      <string name="loading_data">Loading...</string>
+       <string name="no_internet">no 3g or wifi content</string>
 </resources>
  

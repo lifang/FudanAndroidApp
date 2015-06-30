@@ -204,8 +204,8 @@ public class LoginActivity extends BaseActivity{
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
-				Log.e("LJP", "EEEEEEEEEEE");
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -297,7 +297,7 @@ public class LoginActivity extends BaseActivity{
 					loadingDialog.dismiss();
 				}
 				login_linear_signin.setClickable(true);
-				Toast.makeText(getApplicationContext(), "«ÎºÏ≤ÈÕ¯¬ÁŒ Ã‚",
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
 						Toast.LENGTH_SHORT).show();
 			}
 		});

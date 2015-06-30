@@ -270,7 +270,8 @@ public class FindPassword extends BaseActivity   {
 				if (loadingDialog != null) {
 					loadingDialog.dismiss();
 				}
-				System.out.println("eee" + responseBody.toString());	
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	
@@ -344,6 +345,8 @@ public class FindPassword extends BaseActivity   {
 				if (loadingDialog != null) {
 					loadingDialog.dismiss();
 				}
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
  

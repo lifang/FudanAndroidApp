@@ -171,6 +171,8 @@ public class ClientUpdate {
 				if (loadingDialog != null) {
 					loadingDialog.dismiss();
 				}
+				Toast.makeText(activity,activity.getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	
@@ -377,7 +379,7 @@ public class ClientUpdate {
 				if (whitch == 0) {
 					remoteviews.setProgressBar(R.id.downProgressBar, 100, step, false);
 					remoteviews.setTextViewText(R.id.downPercent, step + "%");
-					remoteviews.setTextViewText(R.id.tv_size,nowSize+"KB / "+totalSize+"M");
+					remoteviews.setTextViewText(R.id.tv_size,nowSize+"M / "+totalSize+"M");
 					mNotificationManager.notify(88888, notification);
 				} else if (whitch == 1) {
 						//upEnDialog.setProgre(count);

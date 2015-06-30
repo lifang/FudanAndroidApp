@@ -577,6 +577,8 @@ public class CustomActivity extends BaseActivity {
 				if (loadingDialog != null) {
 					loadingDialog.dismiss();
 				}
+				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 

@@ -1,5 +1,5 @@
 package com.example.ices.activity;
- 
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
- 
+
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.model.LatLng;
@@ -59,269 +59,286 @@ import com.loopj.android.http.RequestParams;
 
 public class SearchAround extends BaseActivity implements  IXListViewListener ,
 OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
-		private XListView event_listview;
-		private String title;
-		private int page=0;
-		private int rows=Config.ROWS;
-		private LinearLayout eva_nodata;
-		private boolean onRefresh_number = true;
-		private SearchAroundAdapter myAdapter;
-		private String type ;
-		//List<PoiInfo> 
-		private PoiSearch mPoiSearch = null;
-		private SuggestionSearch mSuggestionSearch = null;
-		private BaiduMap mBaiduMap = null;
-		private LatLng ptCenter;
-		/**
-		 * 搜索关键字输入窗口
-		 */
-		private AutoCompleteTextView keyWorldsView = null;
-		private ArrayAdapter<String> sugAdapter = null;
-		private int load_Index = 0;
-		
-		private Dialog dialog;
+	private XListView event_listview;
+	private String title;
+	private int page=0;
+	private int rows=Config.ROWS;
+	private LinearLayout eva_nodata;
+	private boolean onRefresh_number = true;
+	private SearchAroundAdapter myAdapter;
+	private String type ;
+	//List<PoiInfo> 
+	private PoiSearch mPoiSearch = null;
+	private SuggestionSearch mSuggestionSearch = null;
+	private BaiduMap mBaiduMap = null;
+	private LatLng ptCenter;
+	/**
+	 * 搜索关键字输入窗口
+	 */
+	private AutoCompleteTextView keyWorldsView = null;
+	private ArrayAdapter<String> sugAdapter = null;
+	private int load_Index = 0;
 
-		List<PoiInfo>  myList = new ArrayList<PoiInfo>();
-		List<PoiInfo>  moreList = new ArrayList<PoiInfo>();
-		private Handler handler = new Handler() {
-			public void handleMessage(Message msg) {
-				switch (msg.what) {
-				case 0:
-					onLoad( );
-					
-					if(myList.size()==0){
+	private Dialog dialog;
+
+	List<PoiInfo>  myList = new ArrayList<PoiInfo>();
+	List<PoiInfo>  moreList = new ArrayList<PoiInfo>();
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+				onLoad( );
+
+				if(myList.size()==0){
 					//	norecord_text_to.setText("您没有相关的商品");
-						event_listview.setVisibility(View.GONE);
-						eva_nodata.setVisibility(View.VISIBLE);
-					}else {
-						event_listview.setVisibility(View.VISIBLE);
-						eva_nodata.setVisibility(View.GONE);
-					}
-					onRefresh_number = true; 
-				 	myAdapter.notifyDataSetChanged();
-					break;
-				case 1:
-					Toast.makeText(getApplicationContext(), (String) msg.obj,
-							Toast.LENGTH_SHORT).show();
-				 
-					break;
-				case 2: // 网络有问题
-					Toast.makeText(getApplicationContext(), "no 3g or wifi content",
-							Toast.LENGTH_SHORT).show();
-					break;
-				case 3:
-					Toast.makeText(getApplicationContext(),  " refresh too much",
-							Toast.LENGTH_SHORT).show();
-					break;
+					event_listview.setVisibility(View.GONE);
+					eva_nodata.setVisibility(View.VISIBLE);
+				}else {
+					event_listview.setVisibility(View.VISIBLE);
+					eva_nodata.setVisibility(View.GONE);
 				}
-			}
-		};
-		@Override
-		protected void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.eventlist);
-			title=getIntent().getStringExtra("title");
-			myAdapter=new SearchAroundAdapter(SearchAround.this, myList);
- 
-			System.out.println("title``"+title);
-			if(title==null){
-				title="Hotel";
-			}
-			initView();
-			mPoiSearch = PoiSearch.newInstance();
-			mPoiSearch.setOnGetPoiSearchResultListener(this);
-	     	mSuggestionSearch = SuggestionSearch.newInstance();
-	 	    mSuggestionSearch.setOnGetSuggestionResultListener(this);
-//			mPoiSearch.searchInCity((new PoiCitySearchOption())
-//			.city("上海")
-//			.keyword("酒店")
-//			.pageNum(load_Index));
-			float lat=getIntent().getFloatExtra("lat",Float.valueOf("31.302201"));
-			float lng=getIntent().getFloatExtra("lng",Float.valueOf("121.510767"));
-			 ptCenter = new LatLng(Float.valueOf("31.302201"),Float.valueOf("121.510767"));
-			getData();
-		}
-		@Override
-		protected void onPause() {
-			super.onPause();
-		}
+				onRefresh_number = true; 
+				myAdapter.notifyDataSetChanged();
+				break;
+			case 1:
+				Toast.makeText(getApplicationContext(), (String) msg.obj,
+						Toast.LENGTH_SHORT).show();
 
-		@Override
-		protected void onResume() {
-			super.onResume();
-		}
-
-		@Override
-		protected void onDestroy() {
-			mPoiSearch.destroy();
-			mSuggestionSearch.destroy();
-			super.onDestroy();
-		}
-
-		@Override
-		protected void onSaveInstanceState(Bundle outState) {
-			super.onSaveInstanceState(outState);
-		}
-
-		@Override
-		protected void onRestoreInstanceState(Bundle savedInstanceState) {
-			super.onRestoreInstanceState(savedInstanceState);
-		}
-
-		private void initView() {
-			// TODO Auto-generated method stub
-			
-			new TitleMenuUtil(SearchAround.this, title).show();
-			eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
-			event_listview=(XListView) findViewById(R.id.event_listview);
-			// refund_listview.getmFooterView().getmHintView().setText("已经没有数据了");
-			event_listview.setPullLoadEnable(true);
-			event_listview.setXListViewListener(this);
-			event_listview.setDivider(null);
- 
-			event_listview.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO Auto-generated method stub
- 				Intent i = new Intent(SearchAround.this,GeoCoderMap.class);
- 				i.putExtra("lat", myList.get(position-1).location.latitude+"");
- 				i.putExtra("lng",myList.get(position-1).location.longitude+"" );
- 				i.putExtra("title",myList.get(position-1).name);
- 				startActivityForResult(i, 10);
+				break;
+			case 2: // 网络有问题
+				Toast.makeText(getApplicationContext(), "no 3g or wifi content",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 3:
+				Toast.makeText(getApplicationContext(),  " refresh too much",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 4:
+				if (dialog != null) {
+					dialog.dismiss();
 				}
-			});
-			event_listview.setAdapter(myAdapter);
-			
-			if(title.endsWith("Shops")){
-				type="超市";
+				Toast.makeText(getApplicationContext(),  "no 3g or wifi content",
+						Toast.LENGTH_SHORT).show();
+				break;
 			}
-			if(title.endsWith("Banks and ATM")){
-				type="银行";
-			}
-			if(title.endsWith("Post Offices")){
-				type="邮局";
-			}
-			if(title.endsWith("Hotels")){
-				type="酒店";
-			}
- 
 		}
-		@Override
-		public void onRefresh() {
-			// TODO Auto-generated method stub
-			page = 0;
-			myList.clear();
-			getData();
+	};
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.eventlist);
+		title=getIntent().getStringExtra("title");
+		myAdapter=new SearchAroundAdapter(SearchAround.this, myList);
+
+		System.out.println("title``"+title);
+		if(title==null){
+			title="Hotel";
+		}
+		initView();
+		mPoiSearch = PoiSearch.newInstance();
+		mPoiSearch.setOnGetPoiSearchResultListener(this);
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		//			mPoiSearch.searchInCity((new PoiCitySearchOption())
+		//			.city("上海")
+		//			.keyword("酒店")
+		//			.pageNum(load_Index));
+		float lat=getIntent().getFloatExtra("lat",Float.valueOf("31.302201"));
+		float lng=getIntent().getFloatExtra("lng",Float.valueOf("121.510767"));
+		ptCenter = new LatLng(Float.valueOf("31.302201"),Float.valueOf("121.510767"));
+		getData();
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		mPoiSearch.destroy();
+		mSuggestionSearch.destroy();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+
+	private void initView() {
+		// TODO Auto-generated method stub
+
+		new TitleMenuUtil(SearchAround.this, title).show();
+		eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
+		event_listview=(XListView) findViewById(R.id.event_listview);
+		// refund_listview.getmFooterView().getmHintView().setText("已经没有数据了");
+		event_listview.setPullLoadEnable(true);
+		event_listview.setXListViewListener(this);
+		event_listview.setDivider(null);
+
+		event_listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(SearchAround.this,GeoCoderMap.class);
+				i.putExtra("lat", myList.get(position-1).location.latitude+"");
+				i.putExtra("lng",myList.get(position-1).location.longitude+"" );
+				i.putExtra("title",myList.get(position-1).name);
+				startActivityForResult(i, 10);
+			}
+		});
+		event_listview.setAdapter(myAdapter);
+
+		if(title.endsWith("Shops")){
+			type="超市";
+		}
+		if(title.endsWith("Banks and ATM")){
+			type="银行";
+		}
+		if(title.endsWith("Post Offices")){
+			type="邮局";
+		}
+		if(title.endsWith("Hotels")){
+			type="酒店";
 		}
 
- 
-		@Override
-		public void onLoadMore() {
-			// TODO Auto-generated method stub
-			if (onRefresh_number) {
-				page = page+1;
-				if (Tools.isConnect(getApplicationContext())) {
-					onRefresh_number = false;
-					getData();
-				} else {
-					onRefresh_number = true;
-					handler.sendEmptyMessage(2);
-				}
-			}
-			else {
-				handler.sendEmptyMessage(3);
-			}
-		}
-		private void onLoad() {
-			event_listview.stopRefresh();
-			event_listview.stopLoadMore();
-			event_listview.setRefreshTime(Tools.getHourAndMin());
-		}
+	}
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		page = 0;
+		myList.clear();
+		getData();
+	}
 
-		public void buttonClick() {
-			page = 0;
-			myList.clear();
-			getData();
-		}
-		
-		private void loadingDialog(Activity activity) {
-			dialog = new Dialog(activity, R.style.LoadingDialog);
-			dialog.setCancelable(false);
-			dialog.setContentView(R.layout.dialog_dark);
 
-			TextView titleText = (TextView) dialog.findViewById(R.id.dialog_text);
-			titleText.setText(activity.getString(R.string.loading_data));
+	@Override
+	public void onLoadMore() {
+		// TODO Auto-generated method stub
+		if (onRefresh_number) {
+			page = page+1;
+			if (Tools.isConnect(getApplicationContext())) {
+				onRefresh_number = false;
+				getData();
+			} else {
+				onRefresh_number = true;
+				handler.sendEmptyMessage(2);
+			}
+		}
+		else {
+			handler.sendEmptyMessage(3);
+		}
+	}
+	private void onLoad() {
+		event_listview.stopRefresh();
+		event_listview.stopLoadMore();
+		event_listview.setRefreshTime(Tools.getHourAndMin());
+	}
 
-		}
-		
-		private void getData() { 
-			loadingDialog(this);
-			dialog.show();
-			System.out.println("page--"+page);
-			mPoiSearch.searchNearby(new PoiNearbySearchOption().location(ptCenter).keyword(type).radius(3000).pageNum(page));
-		}
-		@Override
-		public void onGetSuggestionResult(SuggestionResult arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void onGetPoiDetailResult(PoiDetailResult arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void onGetPoiResult(PoiResult result) {
-			// TODO Auto-generated method stub
-			if (dialog != null) {
-				dialog.dismiss();
-			}
-			if (result == null
-					|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
-//				Toast.makeText(SearchAround.this, "未找到结果 1", Toast.LENGTH_LONG)
-//				.show();
-				Toast.makeText(SearchAround.this, "no more data", Toast.LENGTH_LONG)
-				.show();
-				handler.sendEmptyMessage(0);
-				return;
-			}
-			if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//				mBaiduMap.clear();
-//				PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
-//				mBaiduMap.setOnMarkerClickListener(overlay);
-//				overlay.setData(result);
-//				overlay.addToMap();
-//				overlay.zoomToSpan();
-				moreList.clear();
-				for(int i=0;i<result.getAllPoi().size();i++){
-					System.out.println("进入详情+"+result.getAllPoi().get(i).name+result.getAllPoi().get(i).address);
-					moreList.add(result.getAllPoi().get(i));
-				}
-				//System.out.println("进入详情+"+result.get);
-				if (moreList.size()==0) {
-						Toast.makeText(getApplicationContext(),
-								"no more data", Toast.LENGTH_SHORT).show();
-						event_listview.getmFooterView().setState2(2);
-				 
-					} 
- 				myList.addAll(moreList);
- 				handler.sendEmptyMessage(0);
-				return;
-			}
-			if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+	public void buttonClick() {
+		page = 0;
+		myList.clear();
+		getData();
+	}
 
-				// 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
-				String strInfo = "在";
-				for (CityInfo cityInfo : result.getSuggestCityList()) {
-					strInfo += cityInfo.city;
-					strInfo += ",";
-				}
-				strInfo += "找到结果 3";
-				Toast.makeText(SearchAround.this, strInfo, Toast.LENGTH_LONG)
-						.show();
-			}
+	private void loadingDialog(Activity activity) {
+		dialog = new Dialog(activity, R.style.LoadingDialog);
+		dialog.setCancelable(false);
+		dialog.setContentView(R.layout.dialog_dark);
+
+		TextView titleText = (TextView) dialog.findViewById(R.id.dialog_text);
+		titleText.setText(activity.getString(R.string.loading_data));
+
+	}
+
+	private void getData() { 
+		loadingDialog(this);
+		dialog.show();
+		System.out.println("page--"+page);
+		mPoiSearch.searchNearby(new PoiNearbySearchOption().location(ptCenter).keyword(type).radius(3000).pageNum(page));
+		new Thread(new Runnable(){    
+			public void run(){    
+				try {
+					Thread.sleep(10000);
+					handler.sendEmptyMessage(4);   
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}    
+			}    
+		}).start();  
+	}
+	@Override
+	public void onGetSuggestionResult(SuggestionResult arg0) {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void onGetPoiDetailResult(PoiDetailResult arg0) {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void onGetPoiResult(PoiResult result) {
+		// TODO Auto-generated method stub
+		if (dialog != null) {
+			dialog.dismiss();
 		}
+		if (result == null
+				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+			//				Toast.makeText(SearchAround.this, "未找到结果 1", Toast.LENGTH_LONG)
+			//				.show();
+			Toast.makeText(SearchAround.this, "no more data", Toast.LENGTH_LONG)
+			.show();
+			handler.sendEmptyMessage(0);
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			//				mBaiduMap.clear();
+			//				PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
+			//				mBaiduMap.setOnMarkerClickListener(overlay);
+			//				overlay.setData(result);
+			//				overlay.addToMap();
+			//				overlay.zoomToSpan();
+			moreList.clear();
+			for(int i=0;i<result.getAllPoi().size();i++){
+				System.out.println("进入详情+"+result.getAllPoi().get(i).name+result.getAllPoi().get(i).address);
+				moreList.add(result.getAllPoi().get(i));
+			}
+			//System.out.println("进入详情+"+result.get);
+			if (moreList.size()==0) {
+				Toast.makeText(getApplicationContext(),
+						"no more data", Toast.LENGTH_SHORT).show();
+				event_listview.getmFooterView().setState2(2);
+
+			} 
+			myList.addAll(moreList);
+			handler.sendEmptyMessage(0);
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+
+			// 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
+			String strInfo = "在";
+			for (CityInfo cityInfo : result.getSuggestCityList()) {
+				strInfo += cityInfo.city;
+				strInfo += ",";
+			}
+			strInfo += "找到结果 3";
+			Toast.makeText(SearchAround.this, strInfo, Toast.LENGTH_LONG)
+			.show();
+		}
+	}
 }

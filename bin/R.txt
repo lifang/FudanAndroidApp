@@ -594,6 +594,7 @@ int string drop_down_list_header_pull_text 0x7f070001
 int string drop_down_list_header_release_text 0x7f070002
 int string image_content 0x7f070007
 int string loading_data 0x7f070015
+int string no_internet 0x7f070016
 int string pull_to_refresh_from_bottom_pull_label 0x7f07000b
 int string pull_to_refresh_from_bottom_refreshing_label 0x7f07000d
 int string pull_to_refresh_from_bottom_release_label 0x7f07000c

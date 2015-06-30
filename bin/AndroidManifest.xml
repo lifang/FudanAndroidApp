@@ -165,8 +165,8 @@
          <!-- <meta-data android:name="api_key" android:value="e6fdjuvCM1OwnkG1DTGmC0r2" />  -->
         
      </application>
-         <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
-    </permission>
+  <!--        <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </permission> -->
 
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
     </uses-permission>
