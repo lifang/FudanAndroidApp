@@ -41,7 +41,7 @@
  	    	        android:layout_centerHorizontal="true"
  	    	        android:layout_alignParentBottom="true"
  	    	        android:layout_marginBottom="24dp"
- 	    	        android:background="@drawable/log"/>
+ 	    	        android:background="@drawable/iceslogo"/>
 				 <View
  	    	        android:id="@+id/is_show1"
  	    	        style="@style/dot_item"
@@ -79,7 +79,7 @@
 
     <ImageView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/main_img"/>
+        android:background="@drawable/icesmain"/>
 
      <LinearLayout  
          android:layout_width="fill_parent"
