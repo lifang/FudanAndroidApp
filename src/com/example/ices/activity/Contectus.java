@@ -21,6 +21,6 @@ public class Contectus extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
-		new TitleMenuUtil(Contectus.this, "Contect Us").show();
+		new TitleMenuUtil(Contectus.this, "Contact Us").show();
 	}
 }

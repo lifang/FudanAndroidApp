@@ -40,7 +40,7 @@
  	    	     
  	    	       android:layout_centerInParent="true"
  	    	         
- 	    	        android:background="@drawable/iceslogo"/>
+ 	    	        android:background="@drawable/iceslogo1"/>
 				 <View
  	    	        android:id="@+id/is_show1"
  	    	        style="@style/dot_item"
@@ -79,7 +79,7 @@
 
     <ImageView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/icesmain"/>
+        android:background="@drawable/icesmain1"/>
 
      <LinearLayout  
          android:layout_width="fill_parent"

@@ -10,6 +10,7 @@ import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
  
+import com.examlpe.ices.util.ClientUpdate;
 import com.examlpe.ices.util.LoadingDialog;
 import com.example.ices.BaseActivity;
 import com.example.ices.Config;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
+		new ClientUpdate(MainActivity.this).checkSetting();
 		 url=Config.getNotificationUnReadCount;
 			mySharedPreferences = getSharedPreferences("Usermsg", MODE_PRIVATE);
 			editor = mySharedPreferences.edit();
@@ -111,7 +113,7 @@ public class MainActivity extends BaseActivity {
 	}
 	private void getData() {
 		loadingDialog = LoadingDialog.getLoadingDialg(this);
-		loadingDialog.show();
+		//loadingDialog.show();
 		RequestParams params = new RequestParams();
 		params.put("studentId", MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken()); 
@@ -124,7 +126,7 @@ public class MainActivity extends BaseActivity {
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
 				if (loadingDialog != null) {
-					loadingDialog.dismiss();
+					//loadingDialog.dismiss();
 				}
 				// TODO Auto-generated method stub
 				String userMsg = new String(responseBody).toString();
@@ -157,7 +159,7 @@ public class MainActivity extends BaseActivity {
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
 				if (loadingDialog != null) {
-					loadingDialog.dismiss();
+					//loadingDialog.dismiss();
 				}
 				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
 						Toast.LENGTH_SHORT).show();

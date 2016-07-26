@@ -146,11 +146,12 @@ public class ClientUpdate {
 	 							}.getType());
 						String a=MyApplication.getVersionCode();
 						if(!a.equals(ve.getAppVersionNumber())){
+							 System.out.println("当前版本号2···"+a);
 						 	 DOWN_PATH=	ve.getAppVersionUrl();
 						 //	DOWN_PATH="http://baidu.com/apk_0.01/";
 			 				 showUpdateDialog("New Apk version");
 						}else{
-							Toast.makeText(activity, "Current is the last version", 1000).show();
+							//Toast.makeText(activity, "Current is the last version", 1000).show();
 						}
  					 
 				 
@@ -189,8 +190,9 @@ public class ClientUpdate {
 			e.printStackTrace();
 		}
 		dataVersion= packInfo.versionName;
-			  
-			  System.out.println("当前版本号···"+dataVersion);
+			  MyApplication.setVersionCode(String.valueOf(packInfo.versionCode));
+			  System.out.println("当前版本号···"+packInfo.versionCode);
+			  System.out.println("当前版本号1···"+packInfo.versionName);
 		return dataVersion;
 	}
 

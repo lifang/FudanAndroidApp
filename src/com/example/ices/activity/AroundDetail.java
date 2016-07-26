@@ -226,8 +226,7 @@ public class AroundDetail extends BaseActivity{
 		params.put("studentId",MyApplication.currentUser.getStudentId());
 		params.put("token", MyApplication.getToken()); 
 		params.setUseJsonStreamer(true);
-		System.out.println("MyApplication.currentUser.getStudentId()---"+id);
-		 
+		System.out.println("MyApplication.currentUser.getStudentId()---"+id);		 
 		System.out.println("MyApplication.getToken()---"+MyApplication.getToken());
 		System.out.println("params--"+MyApplication.currentUser.getStudentId()+"---"+ MyApplication.getToken());
 		
@@ -301,9 +300,7 @@ public class AroundDetail extends BaseActivity{
 				Toast.makeText(getApplicationContext(),getResources().getString(R.string.no_internet),
 						Toast.LENGTH_SHORT).show();
 			}
-		});
-
-	
+		});	
 	
 	}
 private void initIndicator(){

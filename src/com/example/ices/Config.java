@@ -23,8 +23,8 @@ public class Config {
 	/**
 	 * ÅäÖÃÂ·¾¶
 	 */
-	 public static String PATH = "http://icesapp.fudan.edu.cn/api/"; //  
- 	//public static String PATH = "http://114.215.149.242:9090/icesapp/api/"; // 
+	 //public static String PATH = "http://icesapp.fudan.edu.cn/api/"; //  
+ 	public static String PATH = "http://114.215.149.242:9090/icesapp/api/"; // 
 	 
 	/**
 	 * Í¼Æ¬Â·¾¶

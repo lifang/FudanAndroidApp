@@ -13,18 +13,79 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-         android:lineSpacingExtra="4dp"
-         android:layout_marginTop="10dp"
-        android:text="Admission &amp; Cooperation Office,International Cultural Exchange School, Fudan UniversityRoom 909, East Main, GuangHua Building,220 Han Dan Road, Shanghai 200433, China"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Admission &amp; Cooperation Office,"
         android:textSize="17sp" />
-  <TextView
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-         android:lineSpacingExtra="4dp"
-        android:text="Tel: +86-21-55664859"
+        android:lineSpacingExtra="4dp"
+        android:text="International Cultural Exchange School,"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Fudan University"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Room 909, East Main, "
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="GuangHua Building, "
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="220 Han Dan Road,  "
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Shanghai 200433,   "
+        android:textSize="17sp" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
+        android:text="China   "
         android:textSize="17sp" />
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +93,18 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-         android:lineSpacingExtra="4dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Tel: +86-21-55664859"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="4dp"
         android:text="Email: yuyansheng@fudan.edu.cn"
         android:textSize="17sp" />
+
 </LinearLayout>
